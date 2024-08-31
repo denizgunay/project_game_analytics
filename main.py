@@ -22,7 +22,12 @@ def get_scaler():
 
 
 # Layout
-st.set_page_config(layout="wide")
+st.set_page_config(
+    layout="wide",
+    page_title="Dream Games - Deniz Gunay",
+    page_icon="https://cdn.prod.website-files.com/668bb5411585cd90fd5046d6/66ad484c30a48b9125740f82_favicon-32x32.webp",
+)
+
 
 # Banner
 custom_html = """
