@@ -107,7 +107,7 @@ scroll_to_top = """
 
 st.markdown(
     """<a href="#dream-games-data-scientist-case-study" style="text-decoration:none;">
-                <button style="position:fixed;bottom:10px;right:10px;padding:10px 20px;font-size:16px;">
+                <button style="position:fixed;bottom:60px;right:10px;padding:10px 20px;font-size:16px;">
                     Back to Top
                 </button>
                </a>""",
