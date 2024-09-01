@@ -1892,6 +1892,161 @@ with part1:
         unsafe_allow_html=True,
     )
 
+    # Graph 33.2 Segmented DAU
+    st.markdown(
+        """
+        <div class="justified-text">
+        <p>
+            <strong><span style="font-size:20px;">NOT</span></strong>: Yukarıdaki segmentasyonu q1_table_revenue tablosundaki kullanıcılar için yaptık. Dolayısıyla segmente ettiğimiz bütün kullanıcılar en azından bir kez satın alma gerçekleştirmiş kullanıcılardan oluşuyor. Yani belirtilen periyotta herhangi bir satın alma gerçekleştirmemiş kullanıcılar herhangi bir segmente dahil edilmiyor.
+        </p>
+        Elde ettiğimiz segmentlerin günlük DAU değerlerini incelediğimizde aşağıdaki grafiğe ulaşıyoruz. Fakat buradaki DAU değerleriyle daha önce incelediğimiz DAU değerlerini lütfen karıştırmayın. Aşağıda en az bir kez satın alma gerçekleştirmiş kullanıcıların DAU değerlerini görüyorsunuz:
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    df33_2 = pd.read_pickle("data/graph33_2.pkl")
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            x=df33_2[df33_2["segment"] == "A"]["event_date"],
+            y=df33_2[df33_2["segment"] == "A"]["dau"],
+            mode="lines+markers",
+            name="A segment DAU",
+            line=dict(color="black"),
+            marker=dict(color="black"),
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=df33_2[df33_2["segment"] == "B"]["event_date"],
+            y=df33_2[df33_2["segment"] == "B"]["dau"],
+            mode="lines+markers",
+            name="B segment DAU",
+            line=dict(color="orange"),
+            marker=dict(color="orange"),
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=df33_2[df33_2["segment"] == "C"]["event_date"],
+            y=df33_2[df33_2["segment"] == "C"]["dau"],
+            mode="lines+markers",
+            name="C segment DAU",
+            line=dict(color="purple"),
+            marker=dict(color="purple"),
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=df33_2[df33_2["segment"] == "D"]["event_date"],
+            y=df33_2[df33_2["segment"] == "D"]["dau"],
+            mode="lines+markers",
+            name="D segment DAU",
+            line=dict(color="darkblue"),
+            marker=dict(color="darkblue"),
+        )
+    )
+
+    fig.update_layout(
+        title="DAU by Segments",
+        xaxis_title="Date",
+        yaxis_title="DAU",
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        xaxis=dict(showgrid=False, showline=True),
+        yaxis=dict(showgrid=False, showline=True),
+    )
+    st.plotly_chart(fig)
+
+    st.markdown(
+        """
+        <div class="justified-text">
+        Yukarıdaki segmentlere ayrılmış DAU grafikleri, sahip oldukları trend itibarıyla daha önceki DAU grafiğimize oldukça benzemektedir. Bütün grafiklerde DAU değerlerinin Mayıs ayı boyunca pozitif bir trende sahip olduğunu, fakat Haziran ayında ise genel bir düşüş söz konusu olduğunu görmekteyiz.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Graph 33.3 Segmented Total Payments
+    st.markdown(
+        """
+        <div class="justified-text">
+        Benzer şekilde, bu segmentlerin günlük yaptığı total payment miktarını günlük bazda inceleyebiliriz:
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            x=df33_2[df33_2["segment"] == "A"]["event_date"],
+            y=df33_2[df33_2["segment"] == "A"]["total_payment"],
+            mode="lines+markers",
+            name="A segment Total Payment",
+            line=dict(color="black"),
+            marker=dict(color="black"),
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=df33_2[df33_2["segment"] == "B"]["event_date"],
+            y=df33_2[df33_2["segment"] == "B"]["total_payment"],
+            mode="lines+markers",
+            name="B segment Total Payment",
+            line=dict(color="orange"),
+            marker=dict(color="orange"),
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=df33_2[df33_2["segment"] == "C"]["event_date"],
+            y=df33_2[df33_2["segment"] == "C"]["total_payment"],
+            mode="lines+markers",
+            name="C segment Total Payment",
+            line=dict(color="purple"),
+            marker=dict(color="purple"),
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=df33_2[df33_2["segment"] == "D"]["event_date"],
+            y=df33_2[df33_2["segment"] == "D"]["total_payment"],
+            mode="lines+markers",
+            name="D segment Total Payment",
+            line=dict(color="darkblue"),
+            marker=dict(color="darkblue"),
+        )
+    )
+
+    fig.update_layout(
+        title="Total Payment by Segments",
+        xaxis_title="Date",
+        yaxis_title="Total Payment",
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        xaxis=dict(showgrid=False, showline=True),
+        yaxis=dict(showgrid=False, showline=True),
+    )
+    st.plotly_chart(fig)
+
+    st.markdown(
+        """
+        <div class="justified-text">
+        Yukaridaki grafiklerde de tıpkı DAU grafiklerinde olduğu gibi bütün segmentler için Mayıs ayı boyunca gerçekleştirilen total payment miktarının arttığını, fakat Haziran ayında düşüşe geçtiğini görüyoruz.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # Graph 34
     st.subheader(":blue[34) RFM Segmentation]")
     st.markdown(
@@ -1902,7 +2057,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            PLTV ile yaptığımız segmentasyonun daha detaylısını RFM Analizi ile gerçekleştirebiliriz. RFM Analizi ile her kullanıcıya birer recency, frequency ve monetary skoru atayacağız. Ardından aşağıdaki tabloya göre recency ve frequency skorundan yola çıkarak segmentasyon işlemini gerçekleştireceğiz:
+            PLTV ile yaptığımız segmentasyonu, RFM Analizi ile kullanıcı bazında bir miktar daha detaylandırabiliriz. RFM Analizi ile her kullanıcıya birer recency, frequency ve monetary skoru atayacağız. Ardından aşağıdaki tabloya göre recency ve frequency skorundan yola çıkarak segmentasyon işlemini gerçekleştireceğiz:
         </div>
         """,
         unsafe_allow_html=True,
@@ -1932,7 +2087,7 @@ with part1:
         path=["segments"],
         values="count",
         color="count",
-        color_continuous_scale="Viridis",  # Renk paleti
+        color_continuous_scale="Viridis",
         title="RFM Segments",
     )
 
