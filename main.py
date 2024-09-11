@@ -21,6 +21,26 @@ def get_scaler():
     return joblib.load("model/scaler.pkl")
 
 
+@st.cache_data
+def get_graph22_2():
+    return pd.read_pickle("data/graph22_2.pkl")
+
+
+@st.cache_data
+def get_graph28_2():
+    return pd.read_pickle("data/graph28_2.pkl")
+
+
+@st.cache_data
+def get_graph31_2():
+    return pd.read_pickle("data/graph31_2.pkl")
+
+
+@st.cache_data
+def get_graph2():
+    return pd.read_pickle("data/graph2.pkl")
+
+
 # Layout
 st.set_page_config(
     layout="wide",
@@ -157,34 +177,59 @@ with part1:
     )
 
     # Graph 2
-    st.subheader(":blue[2) Ülkelere göre oyuncuların ortalama yaşı]")
+    st.subheader(":blue[2) Ülkelere göre oyuncuların yaş dağılımı]")
 
-    df2 = pd.read_pickle("data/graph2.pkl")
-    fig = go.Figure(
-        data=[
-            go.Bar(
-                x=df2["country"],
-                y=df2["avg_age"],
-                marker=dict(color="darkblue"),
-                text=df2["avg_age"].round(),
-                textposition="inside",
-            )
-        ]
+    df2 = get_graph2()
+    country_age = st.selectbox(
+        "country değişkenini seçiniz:",
+        [
+            "Zephyra",
+            "Thalassia",
+            "Sunridge",
+            "Amaryllis",
+            "Brighthaven",
+            "Luminara",
+            "Gleamwood",
+            "Azurelia",
+            "Eldoria",
+            "Windemere",
+            "Rosewyn",
+            "Floravia",
+            "Glimmerdell",
+            "Emberlyn",
+            "Frostford",
+            "Crystalbrook",
+            "Seraphina",
+            "Silvermist",
+            "Moonvale",
+            "Starcliff",
+        ],
+        key="selectbox1",
+    )
+
+    df_age = df2[df2["country"] == country_age]
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Histogram(
+            x=df_age["age"].astype(float),
+            nbinsx=10,
+            histfunc="count",
+            marker_color="skyblue",
+            opacity=0.75,
+            name="Age Distribution",
+        )
     )
 
     fig.update_layout(
-        title="Average Age by Country",
-        title_font=dict(size=15, family="Arial, sans-serif"),
-        xaxis_title="Country",
-        yaxis_title="Average Age",
-        xaxis_title_font=dict(size=18, family="Arial, sans-serif"),
-        yaxis_title_font=dict(size=18, family="Arial, sans-serif"),
-        xaxis=dict(showgrid=False),
-        yaxis=dict(showgrid=False),
-        paper_bgcolor="white",
-        plot_bgcolor="white",
-        margin=dict(l=50, r=50, t=50, b=50),
+        title=f"Age Distribution Histogram for {country_age}",
+        xaxis_title="Age",
+        yaxis_title="Frequency",
+        template="plotly_white",
     )
+
+    fig.update_traces(marker=dict(line=dict(width=1, color="black")))
     st.plotly_chart(fig)
     st.markdown(
         """
@@ -194,7 +239,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Ülkelere göre oyuncuların ortalama yaşlarına baktığımızda çok ilginç bir sonuçla karşılaşıyoruz. Hemen hemen tüm ülkelerde oyuncuların ortalama yaşı 47. Dolayısıyla, genel oyuncu profilinin 40'lı yaşlarda ve muhtemelen iş hayatında yer alan bir yetişkin olduğunu söyleyebiliriz. Bu bilgi, ilerleyen analizleri anlamlandırmamızı kolaylaştıracak.
+            Ülkelere göre oyuncuların yaş dağılımlarına baktığımızda çok ilginç bir sonuçla karşılaşıyoruz. Hemen hemen tüm ülkelerde yaş dağılımı benzer ve yaş ortalaması 47. Dolayısıyla, verilen veri seti için genel oyuncu profilinin 40'lı yaşlarda ve muhtemelen iş hayatında yer alan bir yetişkin olduğunu söyleyebiliriz. Bu bilgi, ilerleyen analizleri anlamlandırmamızı kolaylaştıracak.
         </div>
         """,
         unsafe_allow_html=True,
@@ -314,7 +359,7 @@ with part1:
         xaxis_title_font=dict(size=20, family="Arial, sans-serif"),
         yaxis_title_font=dict(size=20, family="Arial, sans-serif"),
         xaxis=dict(showgrid=False),
-        yaxis=dict(showgrid=False, range=[7450, 7650]),
+        yaxis=dict(showgrid=False, range=[0, 7650]),
         paper_bgcolor="white",
         plot_bgcolor="white",
         margin=dict(l=40, r=40, t=40, b=40),
@@ -328,7 +373,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Oyuncuları yaşlarına göre 16-28, 28-41, 41-53, 53-66 ve 66-78 şeklinde yaş gruplarına ayırdığımızda, oyunda en çok vakit geçiren grubun 41-53 yaş aralığındaki oyuncular olduğunu görmekteyiz.
+            Oyuncuları yaşlarına göre 16-28, 28-41, 41-53, 53-66 ve 66-78 şeklinde yaş gruplarına ayırdığımızda, oyunda geçirilen zamanın hemen hemen tüm yaş grupları için aynı olduğunu görmekteyiz.
         </div>
         """,
         unsafe_allow_html=True,
@@ -375,6 +420,8 @@ with part1:
         </style>
         <div class="justified-text">
             Level'ları gruplayıp kullanıcı başına harcanan ortalama zamanları hesapladığımızda yukarıdaki grafiğe ulaşıyoruz. Grafikte, level 200 ile 700 arasında oyuncuların hemen hemen benzer süreler geçirdiğini, ancak level 700 sonrasında bu sürenin zamanla düştüğünü görmekteyiz. Bu durum, yüksek level'ların zorluk derecesinden kaynaklanıyor olabilir. Bir diğer olasılık ise, oyuncuların oyundan sıkılmış olması olabilir. Elimizdeki veritabanına baktığımızda, level 950'den sonra çok az sayıda oyuncuya ait veri bulunmakta, bu yüzden bu noktada net bir şey söylemek zor. Ancak, yine de level 700 ve sonrası için oyuncuların o level’e kadar hiç karşılaşmadığı ve tekrarlanmayan daha farklı görevler tasarlanabilir.
+        <p></p>
+            Ek olarak, level'ları IQR yöntemi ile tek tek incelediğimizde, Level 199, Level 209, Level 339 ve Level 349'da oyuncuların diğer seviyelere kıyasla daha fazla zaman harcadığını görüyoruz.
         </div>
         """,
         unsafe_allow_html=True,
@@ -444,6 +491,8 @@ with part1:
         </style>
         <div class="justified-text">
             Yukarıdaki grafikte, yeşil barlar win oranını, mavi barlar fail oranını ve turuncu barlar ise quit oranını temsil etmektedir. Yeşil ve mavi barlar için y ekseni solda yer alırken, turuncu bar için y ekseni grafiğin sağında yer almaktadır. Grafikte, level 150’ye kadar win oranının eşit veya daha yüksek olduğunu, level 150’den sonra ise oyunun giderek zorlaştığını ve fail oranının win oranını geçtiğini görmekteyiz. Benzer şekilde, level 150’den itibaren quit oranının da giderek arttığını görüyoruz. Quit oranının artmış olması, bir önceki grafik için yaptığımız “oyunun zorlaşması” veya “oyuncuların sıkılması” yorumunu destekler niteliktedir.
+        <p></p>
+            Ayrıca, bütün level'ları fail oranlarına göre sıraladığımızda, 9'la biten level'ların yüksek fail oranına sahip olduğunu ve Level 199'un en yüksek fail oranına sahip level olduğunu görmekteyiz.
         </div>
         """,
         unsafe_allow_html=True,
@@ -536,9 +585,7 @@ with part1:
         xaxis_title_font=dict(size=20, family="Arial, sans-serif"),
         yaxis_title_font=dict(size=20, family="Arial, sans-serif"),
         xaxis=dict(showgrid=False),
-        yaxis=dict(
-            showgrid=False,
-        ),
+        yaxis=dict(showgrid=False, range=[15000, 21500]),
         paper_bgcolor="white",
         plot_bgcolor="white",
         margin=dict(l=40, r=40, t=40, b=40),
@@ -552,7 +599,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yaş gruplarına göre harcanan ortalama coin miktarına baktığımızda, 41-53 yaş aralığının en çok harcamayı yaptığını görmekteyiz. İlerleyen sayfalarda, kullanıcıların satın alıp almamasını tahmin etmek üzere bir model kuracağız. Bu modelde, harcanan ve kazanılan coin miktarının satın alıp almama kararını oldukça etkilediğini göreceğiz.
+            Yaş gruplarına göre harcanan ortalama coin miktarına baktığımızda, gruplar arasında anlamlı bir fark olmadığını görüyoruz. İlerleyen sayfalarda, kullanıcıların satın alıp almamasını tahmin etmek üzere bir model kuracağız. Bu modelde, harcanan ve kazanılan coin miktarının satın alıp almama kararını oldukça etkilediğini göreceğiz.
         </div>
         """,
         unsafe_allow_html=True,
@@ -582,9 +629,7 @@ with part1:
         xaxis_title_font=dict(size=20, family="Arial, sans-serif"),
         yaxis_title_font=dict(size=20, family="Arial, sans-serif"),
         xaxis=dict(showgrid=False),
-        yaxis=dict(
-            showgrid=False,
-        ),
+        yaxis=dict(showgrid=False, range=[10, 22]),
         paper_bgcolor="white",
         plot_bgcolor="white",
         margin=dict(l=40, r=40, t=40, b=40),
@@ -599,7 +644,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Hem yukarıdaki grafikte hem de bir önceki coin harcama grafiğinde, en az coin ve booster harcayan grubun 28-41 yaş aralığındaki kullanıcılar olduğunu görmekteyiz.
+            Hem yukarıdaki grafikte hem de bir önceki coin harcama grafiğinde, gruplar arasında anlamlı bir fark olmadığını görmekteyiz. 
         </div>
         """,
         unsafe_allow_html=True,
@@ -607,11 +652,12 @@ with part1:
 
     # Graph 10
     st.subheader(":blue[10) Ülkelere göre kullanıcı sayısı]")
+    df2_2 = pd.read_pickle("data/graph2_2.pkl")
     fig = go.Figure(
         data=[
             go.Pie(
-                labels=df2["country"],
-                values=df2["num_users"],
+                labels=df2_2["country"],
+                values=df2_2["num_users"],
                 textinfo="label+percent",
                 hoverinfo="label+value+percent",
                 marker=dict(
@@ -649,8 +695,8 @@ with part1:
     fig = go.Figure(
         data=[
             go.Pie(
-                labels=df2["country"],
-                values=df2["sum_revenue"],
+                labels=df2_2["country"],
+                values=df2_2["sum_revenue"],
                 textinfo="label+percent",
                 hoverinfo="label+value+percent",
                 marker=dict(
@@ -1223,6 +1269,69 @@ with part1:
         </style>
         <div class="justified-text">
             Row Match için ortalama ROAS 0.26 olsa da, ROAS değerlerini günlük bazda incelediğimizde giderek artan bir trend gözlemliyoruz. Mayıs ayının başında ROAS değerleri %6 civarındayken, ayın sonlarına doğru %42'lere ulaşmış durumda; bu, oldukça umut verici bir gelişme.
+        <p></p>
+            Ayrıca, günlük ROAS grafiğine ülkeler bazında bakabilir ve her ülkenin network kırılımlarını inceleyebiliriz:
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    country_roas = st.selectbox(
+        "country seçiniz:",
+        ["Mercury", "Venus", "Pluton", "Saturn", "Uranus"],
+        key="selectbox2",
+    )
+
+    df22_2 = get_graph22_2()
+    df22_2 = df22_2[df22_2["country"] == country_roas]
+    networks = df22_2.network.unique()
+    fig = go.Figure()
+    network_roas = dict()
+    annot_loc = 1
+    for network in networks:
+        temp_df = df22_2[df22_2["network"] == network]
+        fig.add_trace(
+            go.Scatter(
+                x=temp_df["date"],
+                y=temp_df["daily_roas"],
+                mode="lines+markers",
+                name=network,
+            )
+        )
+
+        avg_roas = temp_df["daily_roas"].mean()
+        fig.add_annotation(
+            text=f"Average {network} ROAS: {avg_roas:.2f}",
+            xref="paper",
+            yref="paper",
+            x=0.05,
+            y=annot_loc,
+            showarrow=False,
+            font=dict(size=12, color="darkblue"),
+            align="right",
+        )
+        annot_loc -= 0.1
+
+    fig.update_layout(
+        title=f"ROAS for {country_roas}",
+        xaxis_title="Date",
+        yaxis_title="ROAS",
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        xaxis=dict(showgrid=False, showline=True),
+        yaxis=dict(showgrid=False, showline=True),
+    )
+    st.plotly_chart(fig)
+
+    st.markdown(
+        """
+        <style>
+            .justified-text {
+                text-align: justify;
+            }
+        </style>
+        <div class="justified-text">
+            Örneğin, Mercury ülkesi için Buzz, Sid ve Woody kanalları istikrarlı bir şekilde artarken, Jessie kanalında çok yüksek varyans gözlenmekte. Diğer taraftan, Venus ülkesinde Buzz ve Sid kanallarının istikrarlı olduğunu, fakat Jessie ve Woody kanallarında çok yüksek varyans olduğunu görüyoruz.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1537,6 +1646,66 @@ with part1:
             Yukarıda 45 günlük ARPDAU değerlerini görüyorsunuz. Grafikte oldukça dalgalanma mevcut. Grafikle ilgili ilginç olabilecek bir nokta ise, 2 Mayıs hariç tüm Pazar günlerinin kendisini takip eden Pazartesi gününden daha yüksek ARPDAU değerine sahip olması. Ayrıca, Cuma-Cumartesi-Pazar üçlüsü, ilk hafta hariç tüm haftalarda genel olarak haftanın geri kalanından daha yüksek ARPDAU değerlerine sahip.
         <p></p>
             Hatırlarsanız, daha önce oyuncuların oyunda hafta sonları hafta içlerine kıyasla daha az zaman geçirdiğini gözlemlemiştik. Yukarıdaki grafikle birlikte, hafta sonları daha az zaman geçirmelerine rağmen daha çok harcama yaptıklarını görüyoruz. Bunun sebebi, hafta sonları ve hafta içleri farklı oyuncu segmentlerinin aktif olmasından kaynaklanıyor olabilir. Örneğin, hafta sonları büyük harcamalar yapan whale oyuncular daha aktif oluyorsa, böyle bir tabloyla karşılaşabiliriz. Bir diğer seçenek ise, hafta sonları oyuncuları satın almaya teşvik edecek özel içerik ve etkinliklerin daha fazla gerçekleşiyor olmasıdır. Oyuncular bu etkinlikler sırasında veya bu etkinliklere katılmak için daha fazla harcama yapıyorsa, yine bu tabloyla karşı karşıya kalabiliriz.
+        <p></p>
+            Ayrıca, günlük ARPDAU değerlerini ülkeler bazında inceleyebiliriz:
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    country_arpdau = st.selectbox(
+        "country seçiniz:",
+        ["Mercury", "Venus", "Pluton", "Saturn", "Uranus"],
+        key="selectbox3",
+    )
+    df28_2 = get_graph28_2()
+    a = df28_2[df28_2["country"] == country_arpdau]
+    avg_arpdau_country = a["ARPDAU"].mean()
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            x=a["date"],
+            y=a["ARPDAU"],
+            mode="lines+markers",
+            name="ARPDAU",
+            line=dict(color="black"),
+            marker=dict(color="magenta"),
+        )
+    )
+
+    fig.update_layout(
+        title=f"ARPDAU for {country_arpdau}",
+        xaxis_title="Date",
+        yaxis_title="ARPDAU",
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        xaxis=dict(showgrid=False, showline=True),
+        yaxis=dict(showgrid=False, showline=True),
+    )
+
+    fig.add_annotation(
+        text=f"Average ARPDAU: {avg_arpdau_country:.2f}",
+        xref="paper",
+        yref="paper",
+        x=0.95,
+        y=1.1,
+        showarrow=False,
+        font=dict(size=12, color="darkblue"),
+        align="right",
+    )
+
+    st.plotly_chart(fig)
+
+    st.markdown(
+        """
+        <style>
+            .justified-text {
+                text-align: justify;
+            }
+        </style>
+        <div class="justified-text">
+            Yukarıdaki grafik sayesinde Mercury, Venus ve Pluto ülkelerinde artan bir trend olduğunu, fakat Saturn ve Uranus ülkeleri için böyle bir trendin söz konusu olmadığını görüyoruz. En yüksek ARPDAU değerlerini ise Mercury ve Venus ülkelerinden elde ediyoruz.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1730,6 +1899,69 @@ with part1:
         </style>
         <div class="justified-text">
             CPI grafiğine baktığımızda, ortalama CPI değerinin 4.48 olduğunu görüyoruz. Diğer taraftan, bir önceki grafik olan ARPInstall grafiğinde ortalama ARPInstall değerinin 1.08 olduğunu görmekteyiz. Dolayısıyla, buradan bir kez daha pazarlama harcamalarının gelirden daha yüksek olduğu sonucuna ulaşabiliriz. Grafikle ilgili yapabileceğimiz bir diğer yorum ise, CPI değerinin Mayıs ayının ilk üç haftasında hemen hemen sabitken, Mayıs ayının son haftasında ani bir düşüş göstermesidir. Bunun sebebi, Mayıs ayının son haftasında indirme sayısındaki artış olabilir. Hatırlarsanız, indirme sayısı ile ilgili grafikte (24 numaralı grafik) Mayıs ayının son haftasında indirme sayısında ani bir yükseliş gözlemlemiştik. Dolayısıyla, yukarıdaki grafik daha önceki gözlemlerimizle örtüşmektedir.
+        <p></p>
+            Şimdi de günlük CPI değerlerini ülkeler bazında inceleyip her ülke için network kırılımlarına bakalım:
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    df31_2 = get_graph31_2()
+    country_cpi = st.selectbox(
+        "country seçiniz:",
+        ["Mercury", "Venus", "Pluton", "Saturn", "Uranus"],
+        key="selectbox4",
+    )
+    a = df31_2[df31_2["country"] == country_cpi]
+    networks = a.network.unique()
+    fig = go.Figure()
+    network_roas = dict()
+    annot_loc = 1.05
+    for network in networks:
+        temp_df = a[a["network"] == network]
+        fig.add_trace(
+            go.Scatter(
+                x=temp_df["date"],
+                y=temp_df["cpi"],
+                mode="lines+markers",
+                name=network,
+            )
+        )
+
+        avg_roas = temp_df["cpi"].mean()
+        fig.add_annotation(
+            text=f"Average {network} CPI: {avg_roas:.2f}",
+            xref="paper",
+            yref="paper",
+            x=0.09,
+            y=annot_loc,
+            showarrow=False,
+            font=dict(size=12, color="darkblue"),
+            align="right",
+        )
+        annot_loc -= 0.1
+
+    fig.update_layout(
+        title=f"CPI for {country_cpi}",
+        xaxis_title="Date",
+        yaxis_title="CPI",
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        xaxis=dict(showgrid=False, showline=True),
+        yaxis=dict(showgrid=False, showline=True),
+    )
+
+    st.plotly_chart(fig)
+
+    st.markdown(
+        """
+        <style>
+            .justified-text {
+                text-align: justify;
+            }
+        </style>
+        <div class="justified-text">
+            Örneğin, yukarıdaki grafiğe bakarak Mercury, Venus ve Saturn ülkeleri için en verimli kanalın Jessie olduğunu, fakat Pluto ve Uranus içinse en verimli kanalın Sid olduğunu anlıyoruz.
         </div>
         """,
         unsafe_allow_html=True,
