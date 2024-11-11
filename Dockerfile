@@ -10,8 +10,8 @@ WORKDIR /app
 # This runs pip install for all the packages listed in your requirements.txt file.
 RUN pip install -r requirements.txt
 
-# This tells Docker to listen on port 1999 at runtime.
-EXPOSE 1999
+# This tells Docker to listen on port 8501 at runtime.
+EXPOSE 8501
 
 # This sets the default command for the container to run the app with Streamlit.
 ENTRYPOINT ["streamlit", "run"]
