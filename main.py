@@ -44,7 +44,7 @@ def get_graph2():
 # Layout
 st.set_page_config(
     layout="wide",
-    page_title="Dream Games - Deniz Gunay",
+    page_title="Game Analysis - Deniz Gunay",
     page_icon="https://cdn.prod.website-files.com/668bb5411585cd90fd5046d6/66ad484c30a48b9125740f82_favicon-32x32.webp",
 )
 
@@ -52,17 +52,17 @@ st.set_page_config(
 # Banner
 custom_html = """
 <div class="banner">
-    <img src="https://s3-us-west-2.amazonaws.com/cbi-image-service-prd/original/17a1efd7-2ba4-462e-9f6e-b53c36fbfd7d.png" alt="Banner Image">
+    <img src="https://f5adce358e479954a9c5-8426d9a3ad512832042d342ce93c88f9.ssl.cf3.rackcdn.com/asset-graphics/gameanalytics-gameanalytics-fxhs964e3ktxrbv2ctkp.png" alt="Banner Image">
 </div>
 <style>
     .banner {
-        width: 160%;
-        height: 200px;
+        width: 50%;
+        height: 700px;
         overflow: hidden;
-        background: linear-gradient(to right, white, blue);
+        
     }
     .banner img {
-        width: 23%;
+        width: 80%;
         object-fit: contain;
     }
 </style>
@@ -71,10 +71,10 @@ custom_html = """
 st.components.v1.html(custom_html)
 
 # Header
-st.header(":blue[Dream] Games Data Scientist Case Study")
+st.header(":blue[Game] Data Analysis")
 
 # Audio
-st.audio("audio/royal_match.mp3", format="audio/mpeg", loop=True, autoplay=True)
+st.audio("audio/gangsta_paradise.mp3", format="audio/mpeg", loop=True, autoplay=True)
 
 
 # Tabs
@@ -131,7 +131,7 @@ scroll_to_top = """
 """
 
 st.markdown(
-    """<a href="#dream-games-data-scientist-case-study" style="text-decoration:none;">
+    """<a href="#game-data-analysis" style="text-decoration:none;">
                 <button style="position:fixed;bottom:60px;right:10px;padding:10px 20px;font-size:16px;">
                     Back to Top
                 </button>
@@ -153,7 +153,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Bu bölümde, Row Match oyunundaki mevcut durumu çeşitli metrikler ve kohort analizleriyle anlamaya çalışacağız.
+            Bu bölümde, oyundaki mevcut durumu çeşitli metrikler ve kohort analizleriyle anlamaya çalışacağız.
         </div>
         """,
         unsafe_allow_html=True,
@@ -170,7 +170,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Grafiği incelediğimizde, D1 için retention rate’in %55, D7 için %39, ve D28 için ise %30 civarında olduğunu gözlemlemekteyiz. GameAnalytics’in 2019 yılında yayımladığı Player Retention Report’a göre, en iyi performans gösteren oyunların retention rate’lerinin D1 için ortalama %40, D7 için %15 ve D28 için %6.5 olduğu bilinmektedir. Bu bilgiler ışığında, Row Match’in endüstriye kıyasla çok daha iyi bir retention rate’e sahip olduğunu söyleyebiliriz. Retention rate’i daha da geliştirmek için, oyunculara segmentasyon yapıp loyal oyuncu gruplarına ücretsiz öğeler verilebilir ya da oyuncuların oyunda geçirdikleri zamana göre madalya sistemi geliştirilebilir. Bu şekilde, oyuncuların oyuna olan bağlılıkları pekiştirilip retention rate artırılabilir.
+            Grafiği incelediğimizde, D1 için retention rate’in %55, D7 için %39, ve D28 için ise %30 civarında olduğunu gözlemlemekteyiz. GameAnalytics’in 2019 yılında yayımladığı Player Retention Report’a göre, en iyi performans gösteren oyunların retention rate’lerinin D1 için ortalama %40, D7 için %15 ve D28 için %6.5 olduğu bilinmektedir. Bu bilgiler ışığında, oyunun endüstriye kıyasla çok daha iyi bir retention rate’e sahip olduğunu söyleyebiliriz. Retention rate’i daha da geliştirmek için, oyunculara segmentasyon yapıp loyal oyuncu gruplarına ücretsiz öğeler verilebilir ya da oyuncuların oyunda geçirdikleri zamana göre madalya sistemi geliştirilebilir. Bu şekilde, oyuncuların oyuna olan bağlılıkları pekiştirilip retention rate artırılabilir.
         </div>
         """,
         unsafe_allow_html=True,
@@ -328,7 +328,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte, oyuncuların genel olarak günlük 1 saat civarında zaman geçirdiklerini görüyoruz. Ancak, bu grafiği hafta sonu ve hafta içi olarak ayrı ayrı incelediğimizde, hafta içi oyuncuların daha uzun vakit geçirdiği sonucuna ulaşıyoruz. Bunun sebeplerini anlayabilmek için oyuncu profilini iyi anlamak gerekiyor. Ortalama bir oyuncunun 47 yaşında ve çalışma hayatında olan bir birey olduğunu varsayarsak, muhtemelen bu kişiler işe giderken veya dönerken metroda ya da iş yerlerinde molalarda boş vakitlerini Row Match ile değerlendiriyor olabilirler. Oyuncuların hafta sonları harcadıkları zamanı artırmak için hafta sonlarına özel bazı etkinlikler tasarlanabilir.
+            Yukarıdaki grafikte, oyuncuların genel olarak günlük 1 saat civarında zaman geçirdiklerini görüyoruz. Ancak, bu grafiği hafta sonu ve hafta içi olarak ayrı ayrı incelediğimizde, hafta içi oyuncuların daha uzun vakit geçirdiği sonucuna ulaşıyoruz. Bunun sebeplerini anlayabilmek için oyuncu profilini iyi anlamak gerekiyor. Ortalama bir oyuncunun 47 yaşında ve çalışma hayatında olan bir birey olduğunu varsayarsak, muhtemelen bu kişiler işe giderken veya dönerken metroda ya da iş yerlerinde molalarda boş vakitlerini oyun ile değerlendiriyor olabilirler. Oyuncuların hafta sonları harcadıkları zamanı artırmak için hafta sonlarına özel bazı etkinlikler tasarlanabilir.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1132,7 +1132,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Row Match için yapılan pazarlama harcamaları elde edilen gelirden daha fazla. Yukarıdaki grafikte, Android ve iOS kullanıcıları üzerinden bu durum görselleştirilmiş. Grafikte, iOS kullanıcılarından birim maliyet başına elde edilen gelirin Android kullanıcılarına kıyasla daha yüksek olduğu anlaşılmaktadır. iOS kullanıcılarından daha çok gelir elde edilmesinin olası sebebi, iOS kullanıcılarının daha yüksek ekonomik refah düzeyine sahip olmalarından kaynaklanıyor olabilir. Her halükarda, pazarlama tarafında iOS kullanıcılarının hedeflenmesi şirketin gelirlerini artırabilir.
+            Oyun için yapılan pazarlama harcamaları elde edilen gelirden daha fazla. Yukarıdaki grafikte, Android ve iOS kullanıcıları üzerinden bu durum görselleştirilmiş. Grafikte, iOS kullanıcılarından birim maliyet başına elde edilen gelirin Android kullanıcılarına kıyasla daha yüksek olduğu anlaşılmaktadır. iOS kullanıcılarından daha çok gelir elde edilmesinin olası sebebi, iOS kullanıcılarının daha yüksek ekonomik refah düzeyine sahip olmalarından kaynaklanıyor olabilir. Her halükarda, pazarlama tarafında iOS kullanıcılarının hedeflenmesi şirketin gelirlerini artırabilir.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1196,9 +1196,9 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Oyunda en çok zaman geçiren ve oyunu en çok indiren kullanıcıların iOS kullanıcıları olduğu görülmekte. Row Match'te in-app reklamların yer aldığını varsayarsak, yukarıdaki tablo bizim için olumsuz bir durumu yansıtıyor olabilir. Çünkü in-app reklamlarla gelir sağlanıyorsa, mümkün olduğunca çok sayıda kullanıcıya ulaşmak en doğru strateji olacaktır. Ancak, App Store için kullanıcı edinim maliyeti (user acquisition cost) Play Store'a kıyasla daha yüksek ve dünya genelinde Android kullanıcı sayısı iOS kullanıcı sayısından daha fazla. Dolayısıyla, in-app reklamlarla gelir sağlandığı varsayımında, kullanıcıların çoğunun Android kullanıcısı olması daha karlı bir pozisyon sağlar.
+            Oyunda en çok zaman geçiren ve oyunu en çok indiren kullanıcıların iOS kullanıcıları olduğu görülmekte. Oyunda in-app reklamların yer aldığını varsayarsak, yukarıdaki tablo bizim için olumsuz bir durumu yansıtıyor olabilir. Çünkü in-app reklamlarla gelir sağlanıyorsa, mümkün olduğunca çok sayıda kullanıcıya ulaşmak en doğru strateji olacaktır. Ancak, App Store için kullanıcı edinim maliyeti (user acquisition cost) Play Store'a kıyasla daha yüksek ve dünya genelinde Android kullanıcı sayısı iOS kullanıcı sayısından daha fazla. Dolayısıyla, in-app reklamlarla gelir sağlandığı varsayımında, kullanıcıların çoğunun Android kullanıcısı olması daha karlı bir pozisyon sağlar.
             <p></p>
-            Fakat, Row Match'te abonelik (subscription) veya in-app satın alımla gelir elde edildiğini varsayarsak, yukarıdaki tablo bizim için olumlu bir durumu yansıtıyor olabilir. 2014 yılında yapılan bir Comcast araştırmasına göre, iOS kullanıcılarının medyan yıllık geliri $85,000 iken, Android kullanıcılarının yıllık geliri $61,000 seviyesinde. Yani, iOS kullanıcıları, Android kullanıcılarına kıyasla %40 daha fazla kazanmakta. Bu sosyoekonomik farkın etkilerini, iOS ve Android kullanıcılarının abonelik davranışlarını incelediğimizde de görebiliyoruz. Örneğin, 2021 yılında iOS kullanıcıları abonelik için $13.5 milyar harcamışken, Android kullanıcıları sadece $4.8 milyar harcamış.
+            Fakat, oyunda abonelik (subscription) veya in-app satın alımla gelir elde edildiğini varsayarsak, yukarıdaki tablo bizim için olumlu bir durumu yansıtıyor olabilir. 2014 yılında yapılan bir Comcast araştırmasına göre, iOS kullanıcılarının medyan yıllık geliri $85,000 iken, Android kullanıcılarının yıllık geliri $61,000 seviyesinde. Yani, iOS kullanıcıları, Android kullanıcılarına kıyasla %40 daha fazla kazanmakta. Bu sosyoekonomik farkın etkilerini, iOS ve Android kullanıcılarının abonelik davranışlarını incelediğimizde de görebiliyoruz. Örneğin, 2021 yılında iOS kullanıcıları abonelik için $13.5 milyar harcamışken, Android kullanıcıları sadece $4.8 milyar harcamış.
             <p></p>
             Gelecek projeksiyonlarına göre, iOS kullanıcılarının App Store'da giderek daha fazla harcama yapması beklenmekte:
         </div>
@@ -1268,7 +1268,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Row Match için ortalama ROAS 0.26 olsa da, ROAS değerlerini günlük bazda incelediğimizde giderek artan bir trend gözlemliyoruz. Mayıs ayının başında ROAS değerleri %6 civarındayken, ayın sonlarına doğru %42'lere ulaşmış durumda; bu, oldukça umut verici bir gelişme.
+            Oyun için ortalama ROAS 0.26 olsa da, ROAS değerlerini günlük bazda incelediğimizde giderek artan bir trend gözlemliyoruz. Mayıs ayının başında ROAS değerleri %6 civarındayken, ayın sonlarına doğru %42'lere ulaşmış durumda; bu, oldukça umut verici bir gelişme.
         <p></p>
             Ayrıca, günlük ROAS grafiğine ülkeler bazında bakabilir ve her ülkenin network kırılımlarını inceleyebiliriz:
         </div>
@@ -3098,11 +3098,11 @@ with part2:
         <ul style="padding-left:4px; padding-top:1px; list-style-type:none;">
             <li style="margin-bottom: 10px;">
                 <span style="color: green; font-weight: bold;">&#10004;</span>
-                Eğer Row Match monetizasyon odaklıysa, yani ana hedef geliri artırmak ve kullanıcı başına düşen geliri maksimize etmekse, deney (B) grubu bu konuda daha iyi performans sergiliyor.
+                Eğer oyun monetizasyon odaklıysa, yani ana hedef geliri artırmak ve kullanıcı başına düşen geliri maksimize etmekse, deney (B) grubu bu konuda daha iyi performans sergiliyor.
             </li>
             <li>
                 <span style="color: green; font-weight: bold;">&#10004;</span>
-                Eğer Row Match engagement odaklıysa, yani kullanıcı etkileşimini ve bağlılığını artırmak öncelikse, kontrol (A) grubu bu konuda daha iyi sonuçlar veriyor.
+                Eğer oyun engagement odaklıysa, yani kullanıcı etkileşimini ve bağlılığını artırmak öncelikse, kontrol (A) grubu bu konuda daha iyi sonuçlar veriyor.
             </li>
         </ul>
         """,
