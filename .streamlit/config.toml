@@ -2,8 +2,8 @@
 base="light"
 
 [server]
-headless = false
-port = 1999
+headless = true
+port = 8501
 
 [browser]
-serverPort = 1999
+serverPort = 8501
