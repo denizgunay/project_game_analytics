@@ -79,7 +79,12 @@ st.audio("audio/gangsta_paradise.mp3", format="audio/mpeg", loop=True, autoplay=
 
 # Tabs
 part1, part2, part3, part4 = st.tabs(
-    ["Part I: Analiz", "Part II: A/B Test", "Part III: Model", "Part IV: Tahmin"]
+    [
+        "Part I: Analysis",
+        "Part II: A/B Testing",
+        "Part III: Modelling",
+        "Part IV: Prediction",
+    ]
 )
 
 # Tab configuration
@@ -153,7 +158,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Bu bölümde, oyundaki mevcut durumu çeşitli metrikler ve kohort analizleriyle anlamaya çalışacağız.
+            In this section, we will delve into the current state of the game, leveraging various metrics and cohort analyses to gain deeper insights.
         </div>
         """,
         unsafe_allow_html=True,
@@ -170,18 +175,18 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Grafiği incelediğimizde, D1 için retention rate’in %55, D7 için %39, ve D28 için ise %30 civarında olduğunu gözlemlemekteyiz. GameAnalytics’in 2019 yılında yayımladığı Player Retention Report’a göre, en iyi performans gösteren oyunların retention rate’lerinin D1 için ortalama %40, D7 için %15 ve D28 için %6.5 olduğu bilinmektedir. Bu bilgiler ışığında, oyunun endüstriye kıyasla çok daha iyi bir retention rate’e sahip olduğunu söyleyebiliriz. Retention rate’i daha da geliştirmek için, oyunculara segmentasyon yapıp loyal oyuncu gruplarına ücretsiz öğeler verilebilir ya da oyuncuların oyunda geçirdikleri zamana göre madalya sistemi geliştirilebilir. Bu şekilde, oyuncuların oyuna olan bağlılıkları pekiştirilip retention rate artırılabilir.
+            Looking at the chart, we observe that the retention rate is approximately 55% for D1, 39% for D7, and 30% for D28. According to GameAnalytics’ *Player Retention Report* published in 2019, the top-performing games have average retention rates of 40% for D1, 15% for D7, and 6.5% for D28. In light of this comparison, we can conclude that the game has a significantly higher retention rate than the industry average. To further enhance retention, strategies such as segmenting players and offering free items to loyal player groups could be implemented. Additionally, introducing a medal system based on the time players spend in the game could strengthen player engagement and boost retention rates.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 2
-    st.subheader(":blue[2) Ülkelere göre oyuncuların yaş dağılımı]")
+    st.subheader(":blue[2) Age distribution of players by country]")
 
     df2 = get_graph2()
     country_age = st.selectbox(
-        "country değişkenini seçiniz:",
+        "Please select the country variable:",
         [
             "Zephyra",
             "Thalassia",
@@ -239,16 +244,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Ülkelere göre oyuncuların yaş dağılımlarına baktığımızda çok ilginç bir sonuçla karşılaşıyoruz. Hemen hemen tüm ülkelerde yaş dağılımı benzer ve yaş ortalaması 47. Dolayısıyla, verilen veri seti için genel oyuncu profilinin 40'lı yaşlarda ve muhtemelen iş hayatında yer alan bir yetişkin olduğunu söyleyebiliriz. Bu bilgi, ilerleyen analizleri anlamlandırmamızı kolaylaştıracak.
+            When we examine the age distribution of players by country, we encounter a fascinating finding: the age distribution is remarkably similar across almost all countries, with an average age of 47. This suggests that the typical player profile for the given dataset is an adult in their 40s, likely engaged in professional life. This insight will be invaluable in making sense of the analyses that follow.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 3
-    st.subheader(
-        ":blue[3) Kullanıcılar tarafından oyunda geçirilen ortalama günlük saat]"
-    )
+    st.subheader(":blue[3) Average daily hours spent in the game by users]")
 
     df3 = pd.read_pickle("data/graph3.pkl")
     grouped = (
@@ -328,14 +331,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte, oyuncuların genel olarak günlük 1 saat civarında zaman geçirdiklerini görüyoruz. Ancak, bu grafiği hafta sonu ve hafta içi olarak ayrı ayrı incelediğimizde, hafta içi oyuncuların daha uzun vakit geçirdiği sonucuna ulaşıyoruz. Bunun sebeplerini anlayabilmek için oyuncu profilini iyi anlamak gerekiyor. Ortalama bir oyuncunun 47 yaşında ve çalışma hayatında olan bir birey olduğunu varsayarsak, muhtemelen bu kişiler işe giderken veya dönerken metroda ya da iş yerlerinde molalarda boş vakitlerini oyun ile değerlendiriyor olabilirler. Oyuncuların hafta sonları harcadıkları zamanı artırmak için hafta sonlarına özel bazı etkinlikler tasarlanabilir.
+            The chart above reveals that players generally spend around 1 hour per day in the game. However, when we analyze this data separately for weekdays and weekends, we find that players tend to spend more time in the game on weekdays. To understand the reasons behind this, it’s crucial to have a clear understanding of the player profile. Assuming the average player is 47 years old and actively working, it’s likely that they play the game during their commute, in the metro, or during breaks at work. To encourage players to spend more time in the game on weekends, special weekend events could be designed to enhance engagement.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 4
-    st.subheader(":blue[4) Yaş gruplarına göre oyunda geçirilen toplam zaman]")
+    st.subheader(":blue[4) Total time spent in the game by age groups]")
     df_age_stat = pd.read_pickle("data/graph4.pkl")
     fig = go.Figure()
     fig.add_trace(
@@ -373,14 +376,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Oyuncuları yaşlarına göre 16-28, 28-41, 41-53, 53-66 ve 66-78 şeklinde yaş gruplarına ayırdığımızda, oyunda geçirilen zamanın hemen hemen tüm yaş grupları için aynı olduğunu görmekteyiz.
+            When players are divided into age groups of 16-28, 28-41, 41-53, 53-66, and 66-78, we observe that the time spent in the game is nearly the same across all age groups.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 5
-    st.subheader(":blue[5) Seviyelere göre harcanan ortalama zaman]")
+    st.subheader(":blue[5) Average time spent by levels]")
     df_level_time = pd.read_pickle("data/graph5.pkl")
     fig = go.Figure(
         data=[
@@ -419,16 +422,16 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Level'ları gruplayıp kullanıcı başına harcanan ortalama zamanları hesapladığımızda yukarıdaki grafiğe ulaşıyoruz. Grafikte, level 200 ile 700 arasında oyuncuların hemen hemen benzer süreler geçirdiğini, ancak level 700 sonrasında bu sürenin zamanla düştüğünü görmekteyiz. Bu durum, yüksek level'ların zorluk derecesinden kaynaklanıyor olabilir. Bir diğer olasılık ise, oyuncuların oyundan sıkılmış olması olabilir. Elimizdeki veritabanına baktığımızda, level 950'den sonra çok az sayıda oyuncuya ait veri bulunmakta, bu yüzden bu noktada net bir şey söylemek zor. Ancak, yine de level 700 ve sonrası için oyuncuların o level’e kadar hiç karşılaşmadığı ve tekrarlanmayan daha farklı görevler tasarlanabilir.
+            By grouping the levels and calculating the average time spent per user, we arrive at the chart above. The chart shows that players spend nearly the same amount of time between levels 200 and 700, but after level 700, the time spent begins to decline. This could be due to the increasing difficulty of higher levels, or it might indicate that players are losing interest in the game. Looking at our database, there is very little data available for players above level 950, so it's difficult to draw definitive conclusions at this point. However, for levels 700 and beyond, new, unique, and non-repetitive tasks could be designed to keep players engaged.
         <p></p>
-            Ek olarak, level'ları IQR yöntemi ile tek tek incelediğimizde, Level 199, Level 209, Level 339 ve Level 349'da oyuncuların diğer seviyelere kıyasla daha fazla zaman harcadığını görüyoruz.
+            Additionally, when we examine the levels individually using the IQR method, we notice that players spend more time on Level 199, Level 209, Level 339, and Level 349 compared to other levels.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 6
-    st.subheader(":blue[6) Seviyelere göre win, fail ve quit oranları]")
+    st.subheader(":blue[6) Win, fail, and quit rates by level]")
     df_level_status = pd.read_pickle("data/graph6.pkl")
     trace1 = go.Bar(
         x=df_level_status["level_group"],
@@ -490,16 +493,16 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte, yeşil barlar win oranını, mavi barlar fail oranını ve turuncu barlar ise quit oranını temsil etmektedir. Yeşil ve mavi barlar için y ekseni solda yer alırken, turuncu bar için y ekseni grafiğin sağında yer almaktadır. Grafikte, level 150’ye kadar win oranının eşit veya daha yüksek olduğunu, level 150’den sonra ise oyunun giderek zorlaştığını ve fail oranının win oranını geçtiğini görmekteyiz. Benzer şekilde, level 150’den itibaren quit oranının da giderek arttığını görüyoruz. Quit oranının artmış olması, bir önceki grafik için yaptığımız “oyunun zorlaşması” veya “oyuncuların sıkılması” yorumunu destekler niteliktedir.
+            In the chart above, the green bars represent the win rate, the blue bars represent the fail rate, and the orange bars represent the quit rate. The y-axis for the green and blue bars is on the left, while the y-axis for the orange bars is on the right side of the graph. The chart shows that up until level 150, the win rate is either equal to or higher than the fail rate. However, after level 150, the game becomes progressively harder, and the fail rate surpasses the win rate. Similarly, from level 150 onwards, the quit rate also steadily increases. The rise in quit rates supports our earlier observation from the previous chart that the game is becoming more difficult, or that players may be losing interest.
         <p></p>
-            Ayrıca, bütün level'ları fail oranlarına göre sıraladığımızda, 9'la biten level'ların yüksek fail oranına sahip olduğunu ve Level 199'un en yüksek fail oranına sahip level olduğunu görmekteyiz.
+            Additionally, when we sort all the levels by their fail rates, we observe that levels ending in 9 tend to have higher fail rates, with Level 199 having the highest fail rate overall.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 7
-    st.subheader(":blue[7) Seviyelere göre ortalama moves made ve moves left]")
+    st.subheader(":blue[7) Average moves made and moves left by level]")
     trace1 = go.Scatter(
         x=df_level_status["level_group"],
         y=df_level_status["avg_movesmade_per_user"],
@@ -555,14 +558,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte, mavi renkteki çizgi oyuncular tarafından yapılan ortalama move sayısını, turuncu bar ise ortalama moves left sayısını ifade etmektedir. Bir önceki win, fail ve quit oranlarına ilişkin grafiğe paralel olarak, level 150’den sonra moves made sayısının moves left sayısından daha fazla olduğunu görmekteyiz. Ancak, level 700’den sonra moves made sayısının azaldığı gözlemleniyor. Bu durum, seviyelere göre harcanan ortalama zaman grafiğinde (5 numaralı grafik) karşılaştığımız duruma benziyor. Yüksek seviyedeki kullanıcılarla ilgili yeterli miktarda veri veritabanında yer almıyor. Dolayısıyla, grafikte gördüğümüz azalmanın sebebi ile ilgili net bir yorum yapmak bizim için zorlaşıyor.
+            In the chart above, the blue line represents the average number of moves made by players, while the orange bar indicates the average number of moves left. Similar to the previous chart on win, fail, and quit rates, we can see that after level 150, the number of moves made exceeds the number of moves left. However, after level 700, the number of moves made begins to decline. This trend is similar to what we observed in the chart for average time spent by levels (chart #5). There is insufficient data for players at higher levels in the database, making it difficult to draw a definitive conclusion about the cause of this decline.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 8
-    st.subheader(":blue[8) Yaş gruplarına harcanan ortalama coin miktarı]")
+    st.subheader(":blue[8) Average coin expenditure by age group]")
     fig = go.Figure()
     fig.add_trace(
         go.Scatter(
@@ -599,14 +602,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yaş gruplarına göre harcanan ortalama coin miktarına baktığımızda, gruplar arasında anlamlı bir fark olmadığını görüyoruz. İlerleyen sayfalarda, kullanıcıların satın alıp almamasını tahmin etmek üzere bir model kuracağız. Bu modelde, harcanan ve kazanılan coin miktarının satın alıp almama kararını oldukça etkilediğini göreceğiz.
+            When we look at the average coin expenditure by age group, we observe that there is no significant difference between the groups. In the following pages, we will build a model to predict whether users will make a purchase or not. In this model, we will see that the amount of coins spent and earned has a significant impact on the decision to buy.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 9
-    st.subheader(":blue[9) Yaş gruplarına göre harcanan ortalama booster miktarı]")
+    st.subheader(":blue[9) Average booster expenditure by age group]")
     fig = go.Figure()
     fig.add_trace(
         go.Scatter(
@@ -644,14 +647,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Hem yukarıdaki grafikte hem de bir önceki coin harcama grafiğinde, gruplar arasında anlamlı bir fark olmadığını görmekteyiz. 
+            In both the chart above and the previous coin expenditure chart, we can see that there is no significant difference between the groups. 
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 10
-    st.subheader(":blue[10) Ülkelere göre kullanıcı sayısı]")
+    st.subheader(":blue[10) Number of users by country]")
     df2_2 = pd.read_pickle("data/graph2_2.pkl")
     fig = go.Figure(
         data=[
@@ -684,14 +687,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Ülkelere göre kullanıcıları incelediğimizde, kullanıcıların %28 oranıyla en çok Zephyra ülkesinde yer aldığı görülüyor. Zephyra ülkesini %14.3 oranıyla Emberlyn ve %8.71 oranıyla Moonvale ülkesi takip ediyor.
+            When we look at the users by country, we can see that the largest proportion, 28%, is from Zephyra. Following Zephyra, Emberlyn accounts for 14.3%, and Moonvale follows with 8.71%.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 11
-    st.subheader(":blue[11)	Ülkelere göre gelir dağılımı]")
+    st.subheader(":blue[11)	Revenue distribution by country]")
     fig = go.Figure(
         data=[
             go.Pie(
@@ -723,7 +726,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Ülkelere göre gelir dağılımını incelediğimizde, toplam gelirin %68’inin Zephyra ülkesinden geldiğini görmekteyiz. Zephyra ülkesini sırasıyla %7 ile Amaryllis ve %4.85 ile Gleamwood takip ediyor. Diğer taraftan, kullanıcıların %23’ü Emberlyn ve Moonvale ülkelerinde yer almasalarına rağmen, bu ülkeler toplam gelirin sadece %2.4’ünü oluşturmaktadır. Dolayısıyla, oyun içi etkinliklerde özellikle Zephyra ülkesindeki kullanıcıların takvimleri ve özel günleri dikkate alınmalıdır. Ayrıca, Amaryllis ve Gleamwood ülkelerindeki pazarlama çalışmaları artırılmalıdır.
+            When examining the revenue distribution by country, we see that 68% of the total revenue comes from Zephyra. Following Zephyra, Amaryllis accounts for 7%, and Gleamwood follows with 4.85%. On the other hand, although 23% of the users are from Emberlyn and Moonvale, these countries contribute only 2.4% of the total revenue. Therefore, in-game activities should particularly consider the schedules and special days of users from Zephyra. Additionally, marketing efforts should be increased in Amaryllis and Gleamwood.
         </div>
         """,
         unsafe_allow_html=True,
@@ -731,7 +734,7 @@ with part1:
 
     # Graph 12
     st.subheader(
-        ":blue[12)	Etkinlik katılımına göre gelir dağılımı ve harcanan ortalama zaman miktarı]"
+        ":blue[12)	Revenue distribution and average time spent based on event participation]"
     )
     df12 = pd.read_pickle("data/graph12.pkl")
 
@@ -793,15 +796,15 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukaridaki ilk grafikte, gelirin %75’lik kısmının etkinliklere katılan kullanıcılar tarafından geldiğini görmekteyiz. Dolayısıyla, bir önceki grafikte bahsettiğimiz Zephyra ülkesinin etkinlik takvimini çeşitlendirmek, gelir artışı sağlayabilir.
-            İkinci grafikte ise etkinliğe katılan kullanıcıların, katılmayan kullanıcılara kıyasla oyun içinde iki kat daha uzun süre geçirdiği görülüyor. Daha önceki grafiklerden, kullanıcıların hafta içi oyun içinde daha fazla vakit geçirdiğini ve hafta sonu için etkinlik planlamanın oyun içi geçirilen süreyi artırabileceğini ifade etmiştik. Ikinci grafik bu ifademizi destekler nitelikte. Yani, hafta sonlarına daha fazla sayıda etkinlik eklemek, oyuncuların oyun içinde geçirdiği süreyi artıracaktır.
+            In the first chart above, we can see that 75% of the revenue comes from users who participate in events. Therefore, diversifying the event calendar for Zephyra, as mentioned in the previous chart, could lead to increased revenue.
+            In the second chart, we observe that users who participate in events spend twice as much time in the game compared to those who do not. From previous charts, we noted that users spend more time in the game during weekdays, and that planning events for weekends could increase the time spent in the game. The second chart supports this observation. In other words, adding more events on weekends will likely increase the amount of time players spend in the game.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 13
-    st.subheader(":blue[13)	Network ve Installation İlişkisi]")
+    st.subheader(":blue[13)	Network and Installation]")
     df13 = pd.read_pickle("data/graph13.pkl")
     fig = px.bar(
         df13.sort_values(by="total_installments", ascending=False),
@@ -832,14 +835,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte, en çok indirmenin Buzz sayesinde elde edildiğini görüyoruz. Bununla ilgili bir yorum yapmadan önce, bu kanallar için ne kadar harcama yapıldığını inceleyelim.
+            In the chart above, we can see that the majority of downloads came from Buzz. Before making any comments on this, let's first take a look at the spending for these channels.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 14
-    st.subheader(":blue[14)	Network ve Cost İlişkisi]")
+    st.subheader(":blue[14)	Network and Cost]")
     fig = px.bar(
         df13.sort_values(by="total_cost", ascending=False),
         x="total_cost",
@@ -869,14 +872,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte de, bir önceki kullanıcı sayısı grafiğiyle aynı sıralamayı görmekteyiz. Oyunu kendiliğinden, organik bir şekilde indiren kullanıcılar için herhangi bir maliyet meydana gelmiyor. Dolayısıyla, şirket açısından en verimli yöntem organik büyüme. Ancak diğer kanallar ne kadar verimli? Bunu öğrenmek için aşağıdaki "Network ve Number of Installation per $" grafiğine bakmamız gerekiyor.
+            In the chart above, we see the same ranking as in the previous one regarding the number of users. There is no cost associated with users who download the game organically. Therefore, organic growth is the most cost-effective strategy for the company. But how efficient are the other channels? To answer that, we need to look at the "Network and Number of Installations per $" chart below.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 15
-    st.subheader(":blue[15) Network ve Number of Installation per $ İlişkisi]")
+    st.subheader(":blue[15) Network and Number of Installations per $]")
     fig = px.bar(
         df13,
         x="installs_per_cost_unit",
@@ -906,14 +909,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafiğe bakarak, şirket açısından en verimli pazarlamanın sırasıyla Buzz, Sid, Woody ve Jessie kanallarına yapılan yatırım olduğunu görmekteyiz. Dolayısıyla, şirketin pazarlama harcamalarını doğru şekilde yönettiğini anlıyoruz. Elbette, yukarıdaki grafikte gizli birinci olarak görülen Organic kanal, fakat herhangi bir maliyet harcaması gerektirmediği için en son sırada görünmekte. Organic kanal ile daha fazla kullanıcı çekmek için, "Arkadaş Davetiyesi" gibi uygulamalar oyun içine eklenebilir ve davetiye yollayan ile bu davetiyeyle oyunu indiren kullanıcılar için çeşitli ödüllendirme yöntemlerine başvurulabilir.
+            Looking at the graph above, we can see that the most efficient marketing investments for the company are in the Buzz, Sid, Woody, and Jessie channels, in that order. This indicates that the company is managing its marketing expenses effectively. Of course, the Organic channel is the hidden leader in the graph, but it appears last because it doesn't incur any cost. To attract more users through the Organic channel, features like "Invite a Friend" could be added to the game, with various reward mechanisms for both the inviter and the users who download the game via the invite.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 16
-    st.subheader(":blue[16)	Ülkelere Göre Installation Sayısı]")
+    st.subheader(":blue[16)	Number of Installations by Country]")
     df16 = pd.read_pickle("data/graph16.pkl")
     fig = px.bar(
         df16.sort_values(by="total_installments", ascending=False),
@@ -944,14 +947,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte, en çok indirmenin sırasıyla Mercury, Pluton ve Venus ülkelerinde gerçekleştiğini görüyoruz. Bir yorum yapmadan önce, bu ülkelerdeki pazarlama harcamalarına bakalım. Bir sonraki grafikte buna göz atacağız.
+            In the chart above, we can see that the highest number of installations occurred in Mercury, Pluton, and Venus, in that order. Before making any conclusions, let's take a look at the marketing expenditures in these countries. We will examine this in the next chart.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 17
-    st.subheader(":blue[17)	Ülkelere Göre Marketing Cost]")
+    st.subheader(":blue[17)	Marketing Costs by Country]")
     fig = px.bar(
         df16.sort_values(by="total_cost", ascending=False),
         x="total_cost",
@@ -981,14 +984,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte, her ülkeye yapılan harcamaları görmekteyiz. Bir önceki grafik olan kullanıcı sayısı grafiğiyle yukarıdaki grafik benzer sıralamaya sahip. Her iki grafikte de Mercury, Venus, Pluton, Saturn ve Uranus sıralaması aynı. Ancak, hangi ülkeye yapılan harcamanın en çok installation sağladığını belirlemek için, her ülkenin installation sayısını o ülke için yapılan toplam harcamaya bölerek bu sorunun cevabını bulacağız. Bir sonraki grafikte bu sorunun yanıtını vereceğiz.
+            In the chart above, we can see the spending for each country. The ranking is quite similar to the previous chart showing the number of installations. Both charts show the same ranking for Mercury, Venus, Pluton, Saturn, and Uranus. However, to determine which country’s spending resulted in the most installations, we will divide the number of installations for each country by the total spending for that country. We will answer this question in the next chart.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 18
-    st.subheader(":blue[18) Ülkelere Göre Birim Maliyet Başına İndirme Sayısı]")
+    st.subheader(":blue[18) Number of Installations per $ by Country]")
     fig = px.bar(
         df16,
         x="installs_per_cost_unit",
@@ -1018,14 +1021,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafik bizim için oldukça önemli, zira harcanan 1$ karşılığında en çok kullanıcıyı Saturn ve Uranus ülkelerinden elde ediyoruz. Diğer taraftan, en çok pazarlama harcaması yapılan Mercury ve Venus ülkelerinde bu rakam oldukça düşük. Dolayısıyla, biraz daha derine inip her ülkedeki kullanıcı başına elde edilen gelire bakabiliriz.
+            The chart above is quite important for us, as we see that Saturn and Uranus countries yield the highest number of users per $1 spent. On the other hand, in Mercury and Venus, where the highest marketing expenditures are made, this figure is relatively low. Therefore, we can dive deeper and analyze the revenue per user in each country.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 19
-    st.subheader(":blue[19) Ülkelere Göre Kullanıcı Başına Elde Edilen Gelir]")
+    st.subheader(":blue[19) Revenue per User by Country]")
     df19 = pd.read_pickle("data/graph19.pkl")
     fig = px.bar(
         df19,
@@ -1056,14 +1059,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafiğe baktığımızda, kullanıcı başına en çok gelirin Venus ve Mercury ülkelerinden, en az gelirin ise Uranus ve Saturn ülkelerinden geldiğini görüyoruz. Böylece, Saturn ve Uranus ülkelerindeki bir kullanıcıyı kazanmak için gereken pazarlama maliyeti her ne kadar az olsa da, bu maliyetin düşük görünmesinde dolar kuru etkili olabilir. Ancak, bu ülkelerin kullanıcılarından elde edilen ortalama gelir diğer ülkelere kıyasla daha düşük. Bu sebeple, Venus ve Mercury ülkelerine yapılan toplam harcama daha yüksek çünkü en çok geliri yine bu iki ülkeden elde ediyoruz.
+            Looking at the graph above, we can see that the highest revenue per user comes from Venus and Mercury, while the lowest revenue is generated from Uranus and Saturn. Although the marketing cost per user in Saturn and Uranus is lower, this could be influenced by exchange rates. However, the average revenue per user from these countries is still lower compared to others. As a result, the total spending in Venus and Mercury is higher, since these two countries generate the most revenue.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 20
-    st.subheader(":blue[20)	Platformlara Göre Gelir, Maliyet ve Maliyet Başına Gelir]")
+    st.subheader(":blue[20)	Revenue, Costs, and Cost Per Revenue by Platform]")
     df20 = pd.read_pickle("data/graph20.pkl")
     trace1 = go.Bar(
         x=df20["platform"],
@@ -1132,7 +1135,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Oyun için yapılan pazarlama harcamaları elde edilen gelirden daha fazla. Yukarıdaki grafikte, Android ve iOS kullanıcıları üzerinden bu durum görselleştirilmiş. Grafikte, iOS kullanıcılarından birim maliyet başına elde edilen gelirin Android kullanıcılarına kıyasla daha yüksek olduğu anlaşılmaktadır. iOS kullanıcılarından daha çok gelir elde edilmesinin olası sebebi, iOS kullanıcılarının daha yüksek ekonomik refah düzeyine sahip olmalarından kaynaklanıyor olabilir. Her halükarda, pazarlama tarafında iOS kullanıcılarının hedeflenmesi şirketin gelirlerini artırabilir.
+            Marketing expenses for the game are higher than the revenue generated. The above chart visualizes this situation for both Android and iOS users. It shows that the revenue per unit cost is higher for iOS users compared to Android users. The likely reason for this higher revenue from iOS users could be their higher economic well-being. In any case, targeting iOS users in marketing efforts could potentially increase the company's revenue.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1196,11 +1199,11 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Oyunda en çok zaman geçiren ve oyunu en çok indiren kullanıcıların iOS kullanıcıları olduğu görülmekte. Oyunda in-app reklamların yer aldığını varsayarsak, yukarıdaki tablo bizim için olumsuz bir durumu yansıtıyor olabilir. Çünkü in-app reklamlarla gelir sağlanıyorsa, mümkün olduğunca çok sayıda kullanıcıya ulaşmak en doğru strateji olacaktır. Ancak, App Store için kullanıcı edinim maliyeti (user acquisition cost) Play Store'a kıyasla daha yüksek ve dünya genelinde Android kullanıcı sayısı iOS kullanıcı sayısından daha fazla. Dolayısıyla, in-app reklamlarla gelir sağlandığı varsayımında, kullanıcıların çoğunun Android kullanıcısı olması daha karlı bir pozisyon sağlar.
+            It appears that iOS users spend the most time in the game and are the most frequent downloaders. If we assume that in-app ads are generating revenue, the table above might reflect a negative situation for us. This is because, if revenue is being generated through in-app ads, the best strategy would be to reach as many users as possible. However, the user acquisition cost for the App Store is higher compared to the Play Store, and globally, there are more Android users than iOS users. Therefore, assuming that revenue is generated through in-app ads, having the majority of users as Android users would be a more profitable position.
             <p></p>
-            Fakat, oyunda abonelik (subscription) veya in-app satın alımla gelir elde edildiğini varsayarsak, yukarıdaki tablo bizim için olumlu bir durumu yansıtıyor olabilir. 2014 yılında yapılan bir Comcast araştırmasına göre, iOS kullanıcılarının medyan yıllık geliri $85,000 iken, Android kullanıcılarının yıllık geliri $61,000 seviyesinde. Yani, iOS kullanıcıları, Android kullanıcılarına kıyasla %40 daha fazla kazanmakta. Bu sosyoekonomik farkın etkilerini, iOS ve Android kullanıcılarının abonelik davranışlarını incelediğimizde de görebiliyoruz. Örneğin, 2021 yılında iOS kullanıcıları abonelik için $13.5 milyar harcamışken, Android kullanıcıları sadece $4.8 milyar harcamış.
+            However, if revenue is generated through subscriptions or in-app purchases, the table above may actually reflect a positive situation for us. According to a 2014 Comcast study, the median annual income of iOS users is $85,000, while Android users earn $61,000 annually. In other words, iOS users earn 40% more than Android users. We can also observe the impact of this socioeconomic difference when we examine the subscription behaviors of iOS and Android users. For instance, in 2021, iOS users spent $13.5 billion on subscriptions, whereas Android users spent only $4.8 billion.
             <p></p>
-            Gelecek projeksiyonlarına göre, iOS kullanıcılarının App Store'da giderek daha fazla harcama yapması beklenmekte:
+            According to future projections, iOS users are expected to spend increasingly more on the App Store.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1216,7 +1219,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Dolayısıyla, pazarlama departmanı App Store ile özel olarak ilgilenmeli ve iOS kullanıcı sayısını daha da artırmak için stratejiler geliştirmelidir.
+            Therefore, the marketing department should focus specifically on the App Store and develop strategies to further increase the number of iOS users.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1268,16 +1271,16 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Oyun için ortalama ROAS 0.26 olsa da, ROAS değerlerini günlük bazda incelediğimizde giderek artan bir trend gözlemliyoruz. Mayıs ayının başında ROAS değerleri %6 civarındayken, ayın sonlarına doğru %42'lere ulaşmış durumda; bu, oldukça umut verici bir gelişme.
+            Although the average ROAS for the game is 0.26, when we examine the ROAS values on a daily basis, we can observe an increasing trend. At the beginning of May, ROAS values were around 6%, but by the end of the month, they had reached 42%, which is a very promising development.
         <p></p>
-            Ayrıca, günlük ROAS grafiğine ülkeler bazında bakabilir ve her ülkenin network kırılımlarını inceleyebiliriz:
+            Additionally, we can take a closer look at the daily ROAS graph by country and examine the network breakdowns for each country:
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     country_roas = st.selectbox(
-        "country seçiniz:",
+        "Please select a country:",
         ["Mercury", "Venus", "Pluton", "Saturn", "Uranus"],
         key="selectbox2",
     )
@@ -1331,14 +1334,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Örneğin, Mercury ülkesi için Buzz, Sid ve Woody kanalları istikrarlı bir şekilde artarken, Jessie kanalında çok yüksek varyans gözlenmekte. Diğer taraftan, Venus ülkesinde Buzz ve Sid kanallarının istikrarlı olduğunu, fakat Jessie ve Woody kanallarında çok yüksek varyans olduğunu görüyoruz.
+            For example, in the Mercury country, the Buzz, Sid, and Woody channels are steadily increasing, while the Jessie channel shows a high level of variance. On the other hand, in the Venus country, the Buzz and Sid channels remain stable, but there is a significant variance observed in the Jessie and Woody channels.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 23
-    st.subheader(":blue[23) Günlük İndirme Miktarları]")
+    st.subheader(":blue[23) Daily Installations]")
     df23 = pd.read_pickle("data/graph23.pkl")
     avg_installs = df23["daily_installs"].mean()
 
@@ -1383,14 +1386,14 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Günlük indirme miktarlarını incelediğimizde, Mayıs ayının son haftasına kadar inişli çıkışlı bir durum söz konusu olsa da, son hafta indirme miktarlarında gözle görülür bir artış dikkat çekiyor. Ortalamaya baktığımızda ise, günlük yaklaşık 7000 indirmenin gerçekleştiği anlaşılmakta.
+            When we look at the daily installations, we can see some fluctuations until the last week of May, but there is a noticeable increase in installs during the final week. On average, we can observe that around 7,000 installs occur daily.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Graph 24
-    st.subheader(":blue[24) DAU ve Günlük Session Sayısı]")
+    st.subheader(":blue[24) DAU and Daily Session Count]")
     df24 = pd.read_pickle("data/graph24.pkl")
     avg_dau = df24["DAU"].mean()
     avg_daily_sessions = df24["daily_sessions"].mean()
@@ -1422,7 +1425,7 @@ with part1:
     )
 
     fig.update_layout(
-        title="Daily Sessions ve DAU",
+        title="Daily Sessions and DAU",
         xaxis_title="Event Date",
         yaxis_title="Daily Sessions",
         yaxis2=dict(
@@ -1465,19 +1468,19 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikle bir önceki grafiği kıyasladığımızda, DAU’nun günlük indirme miktarından daha az olduğunu görüyoruz. Bu durumun birkaç sebebi olabilir:
+            When we compare the above graph with the previous one, we can see that DAU is lower than the daily installations. There could be several reasons for this:
 
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    st.markdown("- Yapılan reklamlar, gameplay’i doğru yansıtmıyor olabilir.")
+    st.markdown("- The advertisements may not accurately reflect the gameplay.")
     st.markdown(
-        "- Oyunun ilk seviyeleri çok kolay veya çok zor olabilir, ya da tutoriallar yetersiz olabilir."
+        "- The early levels of the game may be too easy or too difficult, or the tutorials may be insufficient."
     )
     st.markdown(
-        "- Oyuncuları oyundan soğutacak kadar fazla sayıda oyun içi reklam çıkıyor olabilir."
+        "- There may be too many in-game ads, which could be discouraging players from continuing to play."
     )
 
     st.markdown(
@@ -1500,7 +1503,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Ayrıca, DAU ve günlük session sayısı Mayıs ayı için artan bir trende sahip olsa da, Haziran ayında hem DAU hem de günlük session sayısının azaldığını görüyoruz. DAU ve günlük session sayısının artış ve azalış hızları hakkında bir yorum yapabilmek için SessionDAU grafiğine bakacağız.
+            Additionally, although both DAU and daily session numbers show an increasing trend in May, we observe a decline in both DAU and daily sessions in June. To make a comment on the rate of increase and decrease in DAU and daily sessions, we will examine the SessionDAU graph.
 
         </div>
         """,
@@ -1553,7 +1556,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafiğe baktığımızda, azalan bir trend olduğunu söyleyebiliriz. Dolayısıyla, bu bilgiyi bir önceki grafikle birleştirirsek, Mayıs ayı boyunca DAU artış hızının session sayısı artış hızından daha yüksek olduğunu, ancak Haziran ayında DAU azalış hızının session sayısı azalış hızından daha düşük olduğunu yorumlayabiliriz.
+            Looking at the graph above, we can observe a decreasing trend. Therefore, when combining this information with the previous graph, we can conclude that throughout May, the growth rate of DAU was higher than the growth rate of session numbers. However, in June, the decline rate of DAU was lower than the decline rate of session numbers.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1571,7 +1574,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Elimizdeki veri seti için toplam gelir 413520 ve toplam oyuncu sayısı 214888 olduğu için ARPU değerini 1.92 olarak hesaplıyoruz.
+            For our dataset, the total revenue is 413,520 and the total number of players is 214,888, so the ARPU (Average Revenue Per User) is calculated as 1.92.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1589,7 +1592,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Elimizdeki veri seti için toplam gelir 413520 ve gelir sağlayan toplam oyuncu sayısı ise 8130 olduğu için ARPPU değerini 50.86 olarak hesaplıyoruz. ARPPU ve ARPU arasında çok büyük bir fark olması istenilen bir durum değildir. Burada, satın alma gerçekleştirmeyen oyuncuları iyi analiz edip onları satın almaya ikna edecek stratejiler geliştirmek, diğer taraftan satın alma gerçekleştiren oyuncuların bunu tekrar tekrar yapabilmesini sağlamak için ekstra dikkat ve özen göstermek gerekiyor.
+            For the dataset, the total revenue is 413,520, and the total number of paying players is 8,130, so the ARPPU (Average Revenue Per Paying User) is calculated as 50.86. A large gap between ARPPU and ARPU is not ideal. Therefore, it's crucial to thoroughly analyze non-paying players and develop strategies to encourage them to make purchases. At the same time, extra attention should be given to ensuring that paying players continue to make repeated purchases.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1643,18 +1646,18 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıda 45 günlük ARPDAU değerlerini görüyorsunuz. Grafikte oldukça dalgalanma mevcut. Grafikle ilgili ilginç olabilecek bir nokta ise, 2 Mayıs hariç tüm Pazar günlerinin kendisini takip eden Pazartesi gününden daha yüksek ARPDAU değerine sahip olması. Ayrıca, Cuma-Cumartesi-Pazar üçlüsü, ilk hafta hariç tüm haftalarda genel olarak haftanın geri kalanından daha yüksek ARPDAU değerlerine sahip.
+            Above, you can see the 45-day ARPDAU values. The graph shows significant fluctuations. An interesting point in the graph is that, with the exception of May 2nd, every Sunday has a higher ARPDAU than the following Monday. Additionally, the Friday-Saturday-Sunday trio consistently shows higher ARPDAU values than the rest of the week, except for the first week.
         <p></p>
-            Hatırlarsanız, daha önce oyuncuların oyunda hafta sonları hafta içlerine kıyasla daha az zaman geçirdiğini gözlemlemiştik. Yukarıdaki grafikle birlikte, hafta sonları daha az zaman geçirmelerine rağmen daha çok harcama yaptıklarını görüyoruz. Bunun sebebi, hafta sonları ve hafta içleri farklı oyuncu segmentlerinin aktif olmasından kaynaklanıyor olabilir. Örneğin, hafta sonları büyük harcamalar yapan whale oyuncular daha aktif oluyorsa, böyle bir tabloyla karşılaşabiliriz. Bir diğer seçenek ise, hafta sonları oyuncuları satın almaya teşvik edecek özel içerik ve etkinliklerin daha fazla gerçekleşiyor olmasıdır. Oyuncular bu etkinlikler sırasında veya bu etkinliklere katılmak için daha fazla harcama yapıyorsa, yine bu tabloyla karşı karşıya kalabiliriz.
+            As we observed earlier, players tend to spend less time in the game on weekends compared to weekdays. However, when looking at the above graph, we can see that they spend more during weekends despite spending less time. This could be due to different player segments being active on weekends versus weekdays. For instance, if whale players, who tend to spend large amounts, are more active on weekends, this could explain the trend. Another possibility is that there are more special content and events over the weekend that encourage players to spend more. If players are spending more to participate in these events or during the events themselves, this could also contribute to the observed pattern.
         <p></p>
-            Ayrıca, günlük ARPDAU değerlerini ülkeler bazında inceleyebiliriz:
+            Additionally, we can analyze the daily ARPDAU values on a country-by-country basis:
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     country_arpdau = st.selectbox(
-        "country seçiniz:",
+        "Please select a country:",
         ["Mercury", "Venus", "Pluton", "Saturn", "Uranus"],
         key="selectbox3",
     )
@@ -1705,7 +1708,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafik sayesinde Mercury, Venus ve Pluto ülkelerinde artan bir trend olduğunu, fakat Saturn ve Uranus ülkeleri için böyle bir trendin söz konusu olmadığını görüyoruz. En yüksek ARPDAU değerlerini ise Mercury ve Venus ülkelerinden elde ediyoruz.
+            Looking at the chart above, we can observe an increasing trend in the countries of Mercury, Venus, and Pluto, while no such trend is seen in Saturn and Uranus. The highest ARPDAU values are generated from Mercury and Venus countries.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1790,7 +1793,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Yukarıdaki grafikte hem günlük toplam Playtime'ı hem de PlaytimeDAU çizgilerini görüyorsunuz. Playtime Mayıs ayı boyunca artış gösterse de Haziran ayında azaldığı görülmekte. Diğer taraftan, PlaytimeDAU çizgisinde azalan bir trend dikkat çekiyor. Daha önce DAU ile ilgili grafiğe baktığımızda da, yukarıdaki Playtime grafiğine benzer şekilde Mayıs ayı boyunca arttığını ancak Haziran ayında azaldığını tespit etmiştik. Dolayısıyla, PlaytimeDAU grafiğindeki azalan bir trend, Mayıs ayı boyunca DAU’daki artışın Playtime’daki artıştan daha yüksek olduğunu; Haziran ayında ise DAU’daki azalmanın, Playtime’daki azalmadan daha düşük oranda gerçekleştiğini gösteriyor.
+            In the chart above, you can see both the daily total Playtime and the PlaytimeDAU trends. Although Playtime increased throughout May, it decreased in June. On the other hand, the PlaytimeDAU line shows a declining trend. Previously, when we analyzed the DAU graph, we found a similar pattern where it increased during May but decreased in June. Therefore, the declining trend in the PlaytimeDAU graph suggests that the increase in DAU was higher than the increase in Playtime during May, while in June, the decrease in DAU was at a slower rate compared to the decrease in Playtime.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1844,7 +1847,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            ARPInstall grafiğindeki pozitif trend, monetizasyon stratejilerinin ve pazarlama kampanyalarının başarılı olduğuna işaret ediyor. Zira yukarıdaki grafik, yeni kullanıcılar arasında daha fazla sayıda whale oyuncu olduğunu ve yeni oyuncuların daha yüksek miktarlarda harcama yaptığını gösteriyor.
+            The positive trend in the ARPInstall graph indicates that monetization strategies and marketing campaigns have been successful. The chart above shows that there is a higher number of whale players among new users, and these new players are making larger spending amounts.
         </div>
         """,
         unsafe_allow_html=True,
@@ -1898,9 +1901,9 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            CPI grafiğine baktığımızda, ortalama CPI değerinin 4.48 olduğunu görüyoruz. Diğer taraftan, bir önceki grafik olan ARPInstall grafiğinde ortalama ARPInstall değerinin 1.08 olduğunu görmekteyiz. Dolayısıyla, buradan bir kez daha pazarlama harcamalarının gelirden daha yüksek olduğu sonucuna ulaşabiliriz. Grafikle ilgili yapabileceğimiz bir diğer yorum ise, CPI değerinin Mayıs ayının ilk üç haftasında hemen hemen sabitken, Mayıs ayının son haftasında ani bir düşüş göstermesidir. Bunun sebebi, Mayıs ayının son haftasında indirme sayısındaki artış olabilir. Hatırlarsanız, indirme sayısı ile ilgili grafikte (24 numaralı grafik) Mayıs ayının son haftasında indirme sayısında ani bir yükseliş gözlemlemiştik. Dolayısıyla, yukarıdaki grafik daha önceki gözlemlerimizle örtüşmektedir.
+            Looking at the CPI graph, we can see that the average CPI value is 4.48. On the other hand, in the previous ARPInstall graph, the average ARPInstall value is 1.08. Therefore, we can once again conclude that marketing expenses are higher than revenue. Another observation from the graph is that the CPI value remained almost constant during the first three weeks of May, but showed a sharp drop in the last week of May. This could be due to the increase in download numbers during the last week of May. As we saw in the graph related to download numbers (Graph 24), there was a sudden spike in downloads during the last week of May. Therefore, the above graph aligns with our previous observations.
         <p></p>
-            Şimdi de günlük CPI değerlerini ülkeler bazında inceleyip her ülke için network kırılımlarına bakalım:
+            Now, let's check out the daily CPI values by country and take a look at the network breakdowns for each country:
         </div>
         """,
         unsafe_allow_html=True,
@@ -1908,7 +1911,7 @@ with part1:
 
     df31_2 = get_graph31_2()
     country_cpi = st.selectbox(
-        "country seçiniz:",
+        "Please select a country:",
         ["Mercury", "Venus", "Pluton", "Saturn", "Uranus"],
         key="selectbox4",
     )
@@ -1961,7 +1964,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Örneğin, yukarıdaki grafiğe bakarak Mercury, Venus ve Saturn ülkeleri için en verimli kanalın Jessie olduğunu, fakat Pluto ve Uranus içinse en verimli kanalın Sid olduğunu anlıyoruz.
+            For example, by looking at the graph above, we can see that for Mercury, Venus, and Saturn, the most efficient channel is Jessie, while for Pluto and Uranus, Sid proves to be the most effective channel.
         </div>
         """,
         unsafe_allow_html=True,
@@ -2016,11 +2019,11 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Stickiness metriği, retention ve engagement ile ilgili olan önemli bir metriktir. Bu sebeple, stickiness’in olabildiğince yüksek olması arzulanan bir durumdur. Yukarıdaki stickiness grafiğine baktığımızda, pozitif bir trend olduğunu ve stickiness’in giderek arttığını görüyoruz.
+            The stickiness metric is an important measure related to retention and engagement. Therefore, it is desirable for stickiness to be as high as possible. Looking at the stickiness graph above, we can observe a positive trend, with stickiness steadily increasing.
         <p></p>
-            Ancak, ortalama günlük stickiness’i hesapladığımızda %3 gibi bir değer elde ediyoruz, ki bu oldukça düşük bir değerdir. Stickiness’i artırmak için yapılabilecek birinci seçenek, oyundaki kişiselleştirmeyi artırmaktır. Yıllar önce insanların deliler gibi MMORPG oynamalarının nedeni, MMORPG oyunlarındaki kişiselleştirmenin maksimum seviyelerde olmasıdır. Bir oyunu doğru bir şekilde kişiselleştirdiğiniz sürece, oyuncu oynadığı oyunla daha derin bir bağ kuracak ve oyuna olan bağlılığı da artacaktır. Bu nedenle, stickiness’i artırmak için yapılabilecek ilk seçenek, oyundaki kişiselleştirmeyi artırmaktır.
+            However, when we calculate the average daily stickiness, we get a value of 3%, which is quite low. The first option to increase stickiness would be to enhance the personalization within the game. Many years ago, people were deeply engaged in MMORPGs because these games offered maximum levels of personalization. As long as you personalize a game correctly, the player will form a deeper connection with it, leading to greater loyalty. Therefore, the first strategy to boost stickiness would be to increase the level of personalization in the game.
         <p></p>
-            İkinci bir seçenek ise oyuna düzenli ve makul sayıda güncellemeler getirmek ve yeni özellikler eklemektir. Örneğin, tespit edilen bug’ları düzenli olarak güncellemelerle gidermek ve oyunculardan gelen geri bildirimleri takip etmek. Böylece geliştirme süreci oyuncuların beklentileriyle paralel bir şekilde gerçekleşecek ve oyuncuların oyuna olan bağlılığı artacaktır.
+            Another approach would be to regularly release updates with reasonable frequency and introduce new features. For example, consistently fixing bugs through updates and addressing feedback from players. This way, the development process will align with players' expectations, and their engagement with the game will increase.
         </div>
         """,
         unsafe_allow_html=True,
@@ -2118,7 +2121,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Bu grafiklerde Pareto İlkesini gözlemleyebiliriz. Örneğin, A segmentine ait oyuncular toplam oyuncu havuzunun sadece %20’sini oluştururken, elde edilen gelirlerin %80’i A segmentinden geliyor. Ayrıca, A segmenti kullanıcıları B segmentinden 2 kat, C segmentinden 3 kat, D segmentinden ise yaklaşık 5 kat daha yüksek bir AOV (Average Order Value) değerine sahip.
+            We can observe the Pareto Principle in these graphs. For example, players in Segment A make up only 20% of the total player base, yet they account for 80% of the revenue. Additionally, users in Segment A have an Average Order Value (AOV) that is twice as high as Segment B, three times higher than Segment C, and nearly five times higher than Segment D.
         </div>
         """,
         unsafe_allow_html=True,
@@ -2128,10 +2131,7 @@ with part1:
     st.markdown(
         """
         <div class="justified-text">
-        <p>
-            <strong><span style="font-size:20px;">NOT</span></strong>: Yukarıdaki segmentasyonu q1_table_revenue tablosundaki kullanıcılar için yaptık. Dolayısıyla segmente ettiğimiz bütün kullanıcılar en azından bir kez satın alma gerçekleştirmiş kullanıcılardan oluşuyor. Yani belirtilen periyotta herhangi bir satın alma gerçekleştirmemiş kullanıcılar herhangi bir segmente dahil edilmiyor.
-        </p>
-        Elde ettiğimiz segmentlerin günlük DAU değerlerini incelediğimizde aşağıdaki grafiğe ulaşıyoruz. Fakat buradaki DAU değerleriyle daha önce incelediğimiz DAU değerlerini lütfen karıştırmayın. Aşağıda en az bir kez satın alma gerçekleştirmiş kullanıcıların DAU değerlerini görüyorsunuz:
+        When we examine the daily DAU values of the segments we have identified, we arrive at the graph below. However, please do not confuse these DAU values with the ones we reviewed earlier. The values shown below represent the DAU of users who have made at least one purchase:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2197,7 +2197,7 @@ with part1:
     st.markdown(
         """
         <div class="justified-text">
-        Yukarıdaki segmentlere ayrılmış DAU grafikleri, sahip oldukları trend itibarıyla daha önceki DAU grafiğimize oldukça benzemektedir. Bütün grafiklerde DAU değerlerinin Mayıs ayı boyunca pozitif bir trende sahip olduğunu, fakat Haziran ayında ise genel bir düşüş söz konusu olduğunu görmekteyiz.
+        The DAU graphs broken down by segment above show trends that are quite similar to the earlier DAU graph. In all of the graphs, we can observe a positive trend in DAU values throughout May, followed by a general decline in June.
         </div>
         """,
         unsafe_allow_html=True,
@@ -2207,7 +2207,7 @@ with part1:
     st.markdown(
         """
         <div class="justified-text">
-        Benzer şekilde, bu segmentlerin günlük yaptığı total payment miktarını günlük bazda inceleyebiliriz:
+        Similarly, we can analyze the total daily payment amount made by these segments on a daily basis:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2273,7 +2273,7 @@ with part1:
     st.markdown(
         """
         <div class="justified-text">
-        Yukaridaki grafiklerde de tıpkı DAU grafiklerinde olduğu gibi bütün segmentler için Mayıs ayı boyunca gerçekleştirilen total payment miktarının arttığını, fakat Haziran ayında düşüşe geçtiğini görüyoruz.
+        In the graphs above, just like in the DAU graphs, we can see that the total payment amount for all segments increased throughout May, but experienced a decline in June.
         </div>
         """,
         unsafe_allow_html=True,
@@ -2289,7 +2289,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            PLTV ile yaptığımız segmentasyonu, RFM Analizi ile kullanıcı bazında bir miktar daha detaylandırabiliriz. RFM Analizi ile her kullanıcıya birer recency, frequency ve monetary skoru atayacağız. Ardından aşağıdaki tabloya göre recency ve frequency skorundan yola çıkarak segmentasyon işlemini gerçekleştireceğiz:
+            We can further refine the segmentation we did with PLTV by using RFM Analysis on a user level. With RFM Analysis, we will assign each user a recency, frequency, and monetary score. Then, based on the recency and frequency scores, we will perform the segmentation according to the table below:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2305,9 +2305,9 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Monetary skorunu segmentasyon sırasında kullanmıyor olmamızın nedeni, recency ve frequency skorlarının bizim için daha önemli olması ve aynı zamanda yüksek recency ve frequency skorlarına sahip bir oyuncunun genellikle yüksek bir monetary skoruna sahip olmasıdır. Bu yüzden yalnızca recency ve frequency skorunu kullanıyoruz.
+            The reason we don't use the monetary score in the segmentation process is that recency and frequency scores are more important for us. Additionally, a player with high recency and frequency scores typically also has a high monetary score. Therefore, we are using only the recency and frequency scores.
         <p></p>
-            Elimizdeki RF skorlarına göre segmente ettiğimizde aşağıdaki tree map'i elde ediyoruz:
+            When we segment based on the RF scores we have, we obtain the tree map below:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2339,7 +2339,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            Buradaki segmentler, özellikle pazarlama departmanı için oldukça değerli. Örneğin, can't_loose segmentine ait kullanıcıların ID'leri pazarlama departmanına verilebilir ve bu kullanıcıları yeniden oyuna çekmek için çalışmalar yapılabilir. loyal_customers ve potential_loyalist segmentindeki kullanıcılara ise çeşitli ödüllendirme stratejileri geliştirilebilir.
+            The segments here are particularly valuable for the marketing department. For example, the IDs of users in the "can't_loose" segment can be provided to the marketing team, who can then work on re-engaging these players. Meanwhile, users in the "loyal_customers" and "potential_loyalist" segments could be targeted with various reward strategies.
         </div>
         """,
         unsafe_allow_html=True,
@@ -2360,20 +2360,20 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            Bu bölümde, bize verilen kontrol (A) ve deney (B) gruplarını, parasal ve etkileşim metrikleri açısından inceleyeceğiz. Şirket tarafından minimum algılanabilir etki (minimum detectable effect), alfa gibi değerler verilmediği için bu değerleri kendimiz varsayarak ilerleyeceğiz. Aynı zamanda, yaptığımız her A/B testi öncesinde hem kontrol hem de deney grupları için A/A testi gerçekleştireceğiz. Böylece, test istatistiği gereğinden fazla hassas ise A/A testi başarısız olacak.
+            In this section, we will analyze the control (A) and experiment (B) groups in terms of financial and engagement metrics. Since the company did not provide values such as the minimum detectable effect (MDE) or alpha, we will assume these values ourselves as we proceed. Additionally, before conducting any A/B tests, we will perform an A/A test for both the control and experiment groups. This will help ensure that if the test statistics are overly sensitive, the A/A test will fail, indicating an issue.
         <p></p>
-            Kullanacağımız yöntemler ise Z testi, t testi ve Mann-Whitney U testi olacak. A/A testlerini Mann-Whitney U testi ile yapacağız. A/B testini ise gerektiğinde Z testi, gerektiğinde t testi ile gerçekleştireceğiz.
+            The methods we will use are the Z-test, t-test, and Mann-Whitney U test. For the A/A tests, we will use the Mann-Whitney U test. For the A/B test, we will use either the Z-test or the t-test, depending on the specific requirements of the test.
         <p></p>
-            Tüm bu sürecin daha kolay olması açısından, ab_result() isimli yazmış olduğum bir fonksiyonu kullanacağız. Bu fonksiyon, input olarak A ve B gruplarını alacak ve bu gruplar üzerinde sırasıyla A/A testi ve A/B testi gerçekleştirecek. Eğer A/A testinde bir başarısızlık gerçekleşirse, A/B testine devam edilmeyecek. Eğer A/A testi başarılı bir şekilde gerçekleşirse, A/B testi ile devam edilecek ve daha kolay anlayabilmemiz için bir görsel plot edilecek.
+            To make the process easier, we will use a function I’ve written called `ab_result()`. This function will take the A and B groups as input and sequentially perform the A/A test followed by the A/B test. If the A/A test fails, the A/B test will not be conducted. However, if the A/A test is successful, the A/B test will proceed, and a visual plot will be generated to help us better understand the results.
         <p></p>
-            Ben biraz sonra yapacağımız analizlerde, A/A testinde bir başarısızlık gerçekleşmediği sürece A/A testinden bahsetmeyeceğim. Ancak yapmış olduğumuz her A/B testi öncesinde A/A testinin de gerçekleştirildiğini aklınızda bulundurun.
+            In the analysis we will perform shortly, I won’t mention the A/A test unless it fails. However, please keep in mind that an A/A test is conducted before every A/B test.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     # Test 1
-    st.subheader(":blue[1) Toplam Harcanan Zaman]")
+    st.subheader(":blue[1) Total Time Spent]")
     st.markdown(
         """
         <style>
@@ -2382,7 +2382,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A ve B gruplarını birleştirip alfa = 0.05 iken güven aralığını hesapladığımızda (87.286, 89.342) olduğunu tespit ediyoruz. Ayrı ayrı incelediğimizde ise, A grubuna ait bir kullanıcının oyunda geçirdiği ortalama toplam zaman 99.964 iken, B grubuna ait bir kullanıcının geçirdiği ortalama toplam zaman 76.356 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            When we combine the A and B groups and calculate the confidence interval with an alpha of 0.05, we find it to be (87.286, 89.342). When examined separately, the average total time spent by a user in group A is 99.964, while the average total time spent by a user in group B is 76.356. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method. 
         </div>
         """,
         unsafe_allow_html=True,
@@ -2423,11 +2423,11 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun oyunda daha az zaman geçirdiğini görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group spends less time in the game.**"
     )
 
     # Test 2
-    st.subheader(":blue[2) Session Sayısı]")
+    st.subheader(":blue[2) Number of Sessions]")
     st.markdown(
         """
         <style>
@@ -2436,7 +2436,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A ve B gruplarını birleştirip alfa = 0.05 iken güven aralığını hesapladığımızda (3.026, 3.097) olduğunu tespit ediyoruz. Ayrı ayrı incelediğimizde ise, A grubuna ait bir kullanıcının ortalama session sayısı 3.456 iken, B grubuna ait bir kullanıcının ortalama session sayısının 2.656 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            When we combine the A and B groups and calculate the confidence interval with an alpha of 0.05, we find it to be (3.026, 3.097). When examined separately, the average number of sessions for a user in group A is 3.456, while the average number of sessions for a user in group B is 2.656. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2477,11 +2477,11 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun session sayısının daha az olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a lower number of sessions.**"
     )
 
     # Test 3
-    st.subheader(":blue[3) Session başına geçirilen ortalama zaman]")
+    st.subheader(":blue[3) Average Time Spent Per Session]")
     st.markdown(
         """
         <style>
@@ -2490,7 +2490,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A ve B gruplarını birleştirip alfa = 0.05 iken güven aralığını hesapladığımızda (26.91, 26.99) olduğunu tespit ediyoruz. Ayrı ayrı incelediğimizde ise, A grubuna ait bir kullanıcının session başına geçirdiği ortalama zaman 26.98 iken, B grubuna ait bir kullanıcının session başına geçirdiği ortalama zaman 26.93 olarak bulunuyor. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            When we combine the A and B groups and calculate the confidence interval with an alpha of 0.05, we find it to be (26.91, 26.99). When examined separately, the average time spent per session for a user in group A is 26.98, while the average time spent per session for a user in group B is 26.93. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2531,7 +2531,7 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) ve kontrol (A) grubu arasında session başına geçirilen ortalama zaman açısından istatistiksel olarak anlamlı bir fark olmadığını görüyoruz.**"
+        "**As a result of the test, we find that there is no statistically significant difference between the experiment (B) and control (A) groups in terms of average time spent per session.**"
     )
 
     # Test 4
@@ -2544,7 +2544,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A ve B gruplarını birleştirip alfa = 0.05 iken güven aralığını hesapladığımızda (217, 222) olduğunu tespit ediyoruz. Ayrı ayrı incelediğimizde ise, A grubuna ait bir kullanıcının oyundaki seviyesinin ortalama 283 iken, B grubuna ait bir kullanıcının oyundaki seviyesinin 154 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            When we combine the A and B groups and calculate the confidence interval with an alpha of 0.05, we find it to be (217, 222). When examined separately, the average in-game level for a user in group A is 283, while the average in-game level for a user in group B is 154. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method: 
         </div>
         """,
         unsafe_allow_html=True,
@@ -2585,11 +2585,11 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun oyundaki seviyesinin daha düşük olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a lower in-game level.**"
     )
 
     # Test 5
-    st.subheader(":blue[5) Kullanıcı başına toplam gelir (revenue)]")
+    st.subheader(":blue[5) Revenue per User]")
     st.markdown(
         """
         <style>
@@ -2598,7 +2598,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A ve B gruplarını birleştirip alfa = 0.05 iken güven aralığını hesapladığımızda (151, 177) olduğunu tespit ediyoruz. Ayrı ayrı incelediğimizde ise, A grubuna ait bir kullanıcının getirdiği toplam gelir ortalama olarak 158 iken, B grubuna ait bir kullanıcının getirdiği toplam gelirin ortalaması 169 olarak bulunuyor. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            When we combine the A and B groups and calculate the confidence interval with an alpha of 0.05, we find it to be (151, 177). When examined separately, the average total revenue generated by a user in group A is 158, while the average total revenue generated by a user in group B is 169. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2639,11 +2639,11 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) ve kontrol (A) grubu arasında kişi başına toplam gelir açısından istatistiksel olarak anlamlı bir fark olmadığını görüyoruz.**"
+        "**As a result of the test, we find that there is no statistically significant difference in revenue per user between the experiment (B) and control (A) groups.**"
     )
 
     # Test 6
-    st.subheader(":blue[6) Transaction Sayısı]")
+    st.subheader(":blue[6) Number of Transactions]")
     st.markdown(
         """
         <style>
@@ -2652,7 +2652,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A ve B gruplarını birleştirip alfa = 0.05 iken güven aralığını hesapladığımızda (11.78, 13.02) olduğunu tespit ediyoruz. Ayrı ayrı incelediğimizde ise, A grubuna ait bir kullanıcının gerçekleştirdiği toplam transaction sayısının ortalama 11.47, B grubuna ait bir kullanıcının gerçekleştirdiği toplam transaction sayısının ortalamasının ise 13.20 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            When we combine the A and B groups and calculate the confidence interval with an alpha of 0.05, we find it to be (11.78, 13.02). When examined separately, the average total number of transactions for a user in group A is 11.47, while the average total number of transactions for a user in group B is 13.20. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2693,7 +2693,7 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun transaction sayısının daha yüksek olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a higher number of transactions.**"
     )
 
     # Test 7
@@ -2706,7 +2706,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A ve B gruplarını birleştirip alfa = 0.05 iken güven aralığını hesapladığımızda (9.16, 9.67) olduğunu tespit ediyoruz. Ayrı ayrı incelediğimizde ise, A grubuna ait bir kullanıcının ortalama AOV değerinin 9.73, B grubuna ait bir kullanıcının ortalama AOV değerinin ise 9.15 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            When we combine the A and B groups and calculate the confidence interval with an alpha of 0.05, we find it to be (9.16, 9.67). When examined separately, the average AOV for a user in group A is 9.73, while the average AOV for a user in group B is 9.15. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2747,11 +2747,11 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun AOV değerinin daha düşük olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a lower AOV.**"
     )
 
     # Test 8
-    st.subheader(":blue[8) Satın Alma Frekansı (Purchase Frequency)]")
+    st.subheader(":blue[8) Purchase Frequency]")
     st.markdown(
         """
         <style>
@@ -2760,7 +2760,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A ve B gruplarını birleştirip alfa = 0.05 iken güven aralığını hesapladığımızda (0.001949, 0.002154) olduğunu tespit ediyoruz. Ayrı ayrı incelediğimizde ise, A grubuna ait bir kullanıcının ortalama satın alma frekansının 0.001897, B grubuna ait bir kullanıcının ortalama satın alma frekansının ise 0.002184 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            When we combine the A and B groups and calculate the confidence interval with an alpha of 0.05, we find it to be (0.001949, 0.002154). When examined separately, the average purchase frequency for a user in group A is 0.001897, while the average purchase frequency for a user in group B is 0.002184. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2801,7 +2801,7 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun satın alma frekansının daha yüksek olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a higher purchase frequency.**"
     )
 
     # Test 9
@@ -2814,7 +2814,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A grubu için ortalama DAU değerinin 1780185, B grubu için ortalama DAU değerinin ise 1332930 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için alfa = 0.05 iken Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            We observe that the average DAU for group A is 1,780,185, while the average DAU for group B is 1,332,930. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method with an alpha of 0.05: 
         </div>
         """,
         unsafe_allow_html=True,
@@ -2855,7 +2855,7 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun DAU değerinin daha düşük olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a lower DAU value.**"
     )
 
     # Test 10
@@ -2868,7 +2868,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A grubu için ortalama ARPDAU değerinin 0.5612, B grubu için ortalama ARPDAU değerinin ise 0.7696 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için alfa = 0.05 iken Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            We observe that the average ARPDAU for group A is 0.5612, while the average ARPDAU for group B is 0.7696. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method with an alpha of 0.05: 
         </div>
         """,
         unsafe_allow_html=True,
@@ -2909,11 +2909,11 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun ARPDAU değerinin daha yüksek olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a higher ARPDAU value.**"
     )
 
     # Test 11
-    st.subheader(":blue[11) Günlük Gelir (Revenue)]")
+    st.subheader(":blue[11) Daily Revenue]")
     st.markdown(
         """
         <style>
@@ -2922,7 +2922,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A grubu için günlük ortalama gelir 6106 iken, B grubu için günlük ortalama gelirinin 7679 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için alfa = 0.05 iken Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz: 
+            We observe that the daily average revenue for group A is 6,106, while the daily average revenue for group B is 7,679. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method with an alpha of 0.05:
         </div>
         """,
         unsafe_allow_html=True,
@@ -2963,7 +2963,7 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun günlük gelir değerinin daha yüksek olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a higher daily revenue.**"
     )
 
     # Test 12
@@ -2976,7 +2976,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A grubu için günlük ARPInstall değeri 4.55 iken, B grubunun günlük ARPInstall değeri 5.99 olarak belirlenmiştir. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için alfa = 0.05 iken t testi yöntemini kullanarak A/B testini gerçekleştireceğiz: 
+            We observe that the daily ARPInstall for group A is 4.55, while the daily ARPInstall for group B is 5.99. To determine if the difference is statistically significant, we will conduct an A/B test using the t-test method with an alpha of 0.05: 
         </div>
         """,
         unsafe_allow_html=True,
@@ -2985,7 +2985,7 @@ with part2:
     st.markdown(
         """
         <p>
-            <strong><span style="font-size:20px;">NOT</span></strong>: Z testi yerine t testi kullanmamızın nedeni, elimizde sadece 28 günlük verinin bulunmasıdır. Veri adedi 30’dan az ise, Z testi yerine t testi kullanmanız tavsiye edilir. Bu örnekte, t testi yerine Z testi kullandığımızda “H0 rejected” sonucuna ulaşıyoruz. Ancak biz t testini kullanacağız ve t testini kullandığımızda “H0 NOT rejected” sonucuna varıyoruz. Veri sayısı arttıkça t testi, Z testine yaklaşır; fakat bu örnekte elimizde az sayıda veri mevcut.
+            <strong><span style="font-size:20px;">NOTE</span></strong>: The reason we are using the t-test instead of the Z-test is that we only have data for 28 days. When the sample size is less than 30, it is recommended to use the t-test rather than the Z-test. In this case, if we were to use the Z-test, we would obtain a "H0 rejected" result. However, by using the t-test, we arrive at a "H0 NOT rejected" result. As the sample size increases, the t-test approaches the Z-test; but in this example, we have a small amount of data.
         </p>
         """,
         unsafe_allow_html=True,
@@ -3026,11 +3026,11 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) ve kontrol (A) grubu arasında ARPInstall açısından istatistiksel olarak anlamlı bir fark olmadığını görüyoruz.**"
+        "**As a result of the test, we observe that there is no statistically significant difference in ARPInstall between the experiment (B) and control (A) groups.**"
     )
 
     # Test 13
-    st.subheader(":blue[13) Transaction Sayısı/DAU]")
+    st.subheader(":blue[13) Number of Transactions per DAU]")
     st.markdown(
         """
         <style>
@@ -3039,7 +3039,7 @@ with part2:
             }
         </style>
         <div class="justified-text">
-            A grubu için DAU başına transaction sayısı 0.0412 iken, B grubu için DAU başına transaction sayısının 0.0602 olduğunu görüyoruz. Aradaki farkın istatistiksel olarak anlamlı olup olmadığını görmek için alfa = 0.05 iken Z testi yöntemini kullanarak A/B testini gerçekleştiriyoruz:
+            We observe that the transaction rate per DAU for group A is 0.0412, while the transaction rate per DAU for group B is 0.0602. To determine if the difference is statistically significant, we conduct an A/B test using the Z-test method with an alpha of 0.05:
         </div>
         """,
         unsafe_allow_html=True,
@@ -3080,14 +3080,14 @@ with part2:
     )
 
     right_part2.markdown(
-        "**Test sonucunda, deney (B) grubunun DAU başına düşen transaction sayısının daha yüksek olduğunu görüyoruz.**"
+        "**As a result of the test, we observe that the experiment (B) group has a higher transaction rate per DAU.**"
     )
 
     # Sonuc
     st.markdown(
         """
         <p>
-            <strong><span style="font-size:20px;">Sonuç olarak</span></strong>:
+            <strong><span style="font-size:20px;">As a result:</span></strong>:
         </p>
         """,
         unsafe_allow_html=True,
@@ -3098,11 +3098,11 @@ with part2:
         <ul style="padding-left:4px; padding-top:1px; list-style-type:none;">
             <li style="margin-bottom: 10px;">
                 <span style="color: green; font-weight: bold;">&#10004;</span>
-                Eğer oyun monetizasyon odaklıysa, yani ana hedef geliri artırmak ve kullanıcı başına düşen geliri maksimize etmekse, deney (B) grubu bu konuda daha iyi performans sergiliyor.
+                If the game is monetization-focused, meaning the main goal is to increase revenue and maximize revenue per user, then the experiment (B) group is performing better in this regard.
             </li>
             <li>
                 <span style="color: green; font-weight: bold;">&#10004;</span>
-                Eğer oyun engagement odaklıysa, yani kullanıcı etkileşimini ve bağlılığını artırmak öncelikse, kontrol (A) grubu bu konuda daha iyi sonuçlar veriyor.
+                If the game is engagement-focused, meaning the priority is to increase user interaction and retention, then the control (A) group is yielding better results in this regard.
             </li>
         </ul>
         """,
@@ -3112,7 +3112,7 @@ with part2:
     st.markdown(
         """
         
-            Elbette, bu sonuçların güvenilirliğini de test etmek gerekir. Örneğin, kullanıcılar belki de sadece değişimin kendisine tepki veriyor olabilir; yani "*novelty effect*" dediğimiz durum söz konusu olabilir. Bu sebeple, burada yaptığımız testler daha geniş bir zaman aralığında tekrar edilmeli ve sonuçlarda bir farklılık olup olmadığı kontrol edilmelidir.
+            Of course, the reliability of these results should also be tested. For example, users might be reacting simply to the change itself, which could be a case of what's known as the "*novelty effect*". Therefore, the tests we conducted here should be repeated over a longer time period, and the results should be checked to see if there are any differences.
         
         """,
         unsafe_allow_html=True,
@@ -3120,7 +3120,7 @@ with part2:
 
 
 ###############################
-# PART III: MODELLEME
+# PART III: MODEL
 ###############################
 with part3:
 
@@ -3132,7 +3132,7 @@ with part3:
             }
         </style>
         <div class="justified-text">
-            Bu bölümde, bir oyuncunun 30 günlük periyodun sonunda satın alma gerçekleştirip gerçekleştirmeyeceğini tahmin eden binary bir sınıflandırma modeli oluşturmayı amaçlayacağız. SQL tablosunda bulunan d30_revenue sütunu binary bir değişken değil; bu yüzden purchased isminde bir binary değişken oluşturuyoruz ve onu hedef değişkenimiz olarak belirliyoruz.
+            In this section, we aim to build a binary classification model that predicts whether a player will make a purchase by the end of a 30-day period. The `d30_revenue` column in the SQL table is not a binary variable, so we create a new binary variable called `purchased` and use it as our target variable.
         </div>
         """,
         unsafe_allow_html=True,
@@ -3156,8 +3156,8 @@ with part3:
             margin-top: -30px;
         }
         .custom-bullet ul {
-            list-style-type: disc;  /* Varsayılan nokta işaretli liste */
-            margin-top: -20px;  /* Üst boşluğu azaltmak için */
+            list-style-type: disc;  
+            margin-top: -20px;  
             text-align: justify;
         }
         </style>
@@ -3169,10 +3169,10 @@ with part3:
         """
         <div class="custom-bullet">
         <ul>
-        <li>İlk olarak, hedef değişkenimiz olan purchased değişkenini inceliyoruz ve kullanıcıların sadece %7.83’ünün satın alma gerçekleştirdiğini öğreniyoruz. Dolayısıyla, bir dengesizliğin (imbalanced dataset) söz konusu olduğunu anlıyoruz. Bu durum, ilerleyen kısımlarda modelimizi eğitirken hangi metriklere odaklanmamız gerektiği konusunda bize fikir veriyor. Dengesiz durumlarda ROC AUC ve F1 gibi skorlar bizim için daha anlamlı olacaktır.</li>
-        <li>Daha sonra veri setindeki null değerleri kontrol ediyoruz. Neyse ki, veri seti oldukça düzenli ve içerisinde hiç null değer bulunmuyor.</li>
-        <li>describe() fonksiyonuyla değişkenlerde herhangi bir anomali olup olmadığını kontrol ediyoruz. Örneğin, age sütununa herhangi bir yerde 0 yazılmışsa, bunu describe fonksiyonu sayesinde öğrenebiliriz. Neyse ki, bu aşamada da anormal bir durum gözükmüyor.</li>
-        <li>Numeric column’lar arasındaki korelasyonu görmek için bir heatmap oluşturuyoruz. Burada, time_spend, coin_spend, coin_earn, level_success, level_fail, level_start, booster_spend, ve booster_earn sütunları arasında oldukça yüksek korelasyonlar keşfediyoruz. Bu bilgiyi daha sonra özellik türetirken kullanabiliriz:</li>
+        <li>First, we examine the target variable, `purchased`, and find that only 7.83% of users made a purchase. This indicates that we are dealing with an imbalanced dataset. This insight helps us determine which metrics to focus on when training our model. In imbalanced situations, metrics like ROC AUC and F1 score will be more meaningful for us.</li>
+        <li>Next, we check for null values in the dataset. Fortunately, the dataset is well-structured and does not contain any null values.</li>
+        <li>We use the `describe()` function to check for any anomalies in the variables. For example, if the `age` column contains a 0 value anywhere, we would be able to identify it using the `describe()` function. Fortunately, at this stage, there are no abnormalities in the data.</li>
+        <li>We create a heatmap to visualize the correlation between the numeric columns. Here, we discover strong correlations between columns such as `time_spend`, `coin_spend`, `coin_earn`, `level_success`, `level_fail`, `level_start`, `booster_spend`, and `booster_earn`. We can use this information later when creating features:</li>
         </ul>
         </div>
         """,
@@ -3186,7 +3186,7 @@ with part3:
         """
         <div class="custom-bullet">
         <ul>
-        <li>Outlier kontrolü yapıyoruz ve time_spend, coin_spend, coin_earn, level_success, level_fail, level_start, booster_spend, booster_earn, coin_amount, event_participate, ve shop_open sütunlarında outlier’lar olduğunu görüyoruz. Outlier’lar, biraz sonra oluşturacağımız modelin performansını olumsuz yönde etkileyebilir, bu yüzden outlier’ları IQR (Interquartile Range) kullanarak %1 ve %99’luk eşiklerle yer değiştiriyoruz.</li>
+        <li>We perform an outlier detection and find outliers in the columns `time_spend`, `coin_spend`, `coin_earn`, `level_success`, `level_fail`, `level_start`, `booster_spend`, `booster_earn`, `coin_amount`, `event_participate`, and `shop_open`. Outliers can negatively affect the performance of the model we are about to build, so we replace them using the IQR (Interquartile Range) method with thresholds at the 1st and 99th percentiles.</li>
         </ul>
         </div>
         """,
@@ -3207,10 +3207,10 @@ with part3:
         """
         <div class="custom-bullet">
         <ul>
-        <li>Kullanıcıların yaşlarından yola çıkarak young, early_adult, mid_adult, late_adult ve old şeklinde kategorik değerlerden oluşan bir kategorik sütun oluşturuyoruz.</li>
-        <li>Daha sonra, one-hot encoding kullanarak bütün kategorik değişkenleri sayısal değişkenlere dönüştürüyoruz.</li>
-        <li>Yüksek korelasyon olduğunu keşfettiğimiz değişkenler üzerinden son derece deneysel bir şekilde yeni değişkenler türetmeye çalışıyoruz. Türettiğimiz değişkenler arasında modelin ROC AUC skorunu geliştiren bir değişken varsa, feature_creator() fonksiyonu bunu bize bildiriyor. feature_creator() fonksiyonu sayesinde time_spend/age ve coin_spend/coin_amount şeklinde oluşturabileceğimiz yeni değişkenlerin modelin ROC AUC skorunu geliştirebileceğini öğreniyoruz. Bu yeni değişkenleri x dataframe’ine ekliyoruz.</li>
-        <li>Son olarak, model seçim bölümünde kullanmak üzere dataframe’i %70 eğitim ve %30 test şeklinde ikiye ayırıyoruz.</li>
+        <li>We create a categorical column based on users' ages, with values categorized as "young", "early_adult", "mid_adult", "late_adult", and "old".</li>
+        <li>Next, we use one-hot encoding to convert all categorical variables into numerical features.</li>
+        <li>We experiment with creating new variables based on the highly correlated features we identified. If any of the newly created variables improve the model's ROC AUC score, the `feature_creator()` function notifies us. Using this function, we discover that new features like `time_spend/age` and `coin_spend/coin_amount` could improve the model's ROC AUC score. We then add these new features to the `x` dataframe.</li>
+        <li>Finally, we split the dataframe into training and test sets, with 70% of the data used for training and 30% for testing, to be used in the model selection phase.</li>
         </ul>
         </div>
         """,
@@ -3235,7 +3235,7 @@ with part3:
             }
         </style>
         <div class="justified-text">
-            Bu aşamada çeşitli modeller deniyoruz. Denediğimiz modelleri ROC AUC ve F1 skoru kriterlerine göre sıraladığımızda, aşağıdaki gibi bir sonuç elde ediyoruz:
+            At this stage, we try several models. When we rank the models based on ROC AUC and F1 score criteria, we get the following results:
         </div>
         """,
         unsafe_allow_html=True,
@@ -3264,7 +3264,7 @@ with part3:
         """
         <div class="justified-text">
         <p>
-            <strong><span style="font-size:20px;">NOT</span></strong>: ROC AUC ve F1 metriklerine bakmamızın sebebi, veri setinin genel olarak dengesiz (imbalanced) olmasıdır. Imbalanced veri setleriyle karşılaştığımızda, veri setini dengeli hale getirmek için undersampling ve oversampling gibi yöntemler kullanabiliriz. Ancak, geçmişte çalıştığım fraud detection modellerinde bu tekniklerden pek fayda elde edemedim. Genel populasyonda satın alma oranı %7.83 ise, modeli de aynı orana sahip bir veri kümesiyle eğitmek, validasyon performansı üzerinde daha faydalı oluyor. Bu sebeple, herhangi bir sampling işlemi yapmadan ROC AUC ve F1 metriklerini kullanarak devam edeceğim. 
+            <strong><span style="font-size:20px;">NOTE</span></strong>: The reason we focus on the ROC AUC and F1 metrics is because the dataset is generally imbalanced. When dealing with imbalanced datasets, techniques like undersampling and oversampling can be used to balance the data. However, for this project, I will not be applying these methods.
         </p>
         </div>
         """,
@@ -3279,7 +3279,7 @@ with part3:
             }
         </style>
         <div class="center-text">
-        Sonuç olarak, CatBoost modelinde karar kılıyoruz.
+        As a result, we decide to go with the CatBoost model.
         </div>
         """,
         unsafe_allow_html=True,
@@ -3298,11 +3298,11 @@ with part3:
     st.markdown(
         """
         <div class="justified-text">
-        Hiperparametre optimizasyonu için Optuna isimli açık kaynak kodlu bir kütüphaneyi kullanacağım. Optuna, sahip olduğu ağaç benzeri algoritma sayesinde hiperparametreler arasında daha verimli ve akıllı bir şekilde arama yaptığı için GridSearch veya RandomSearch gibi yöntemlere kıyasla zaman ve kaynak açısından oldukça tasarruf sağlıyor.
+        For hyperparameter optimization, I will use Optuna, an open-source library. Thanks to its tree-structured algorithm, Optuna performs a more efficient and intelligent search across hyperparameters, resulting in significant time and resource savings compared to methods like GridSearch or RandomSearch.
         <p></p>
-        Veri setini bu kez train_test ve %10’luk validation seti şeklinde ikiye ayırıyorum. Modeli train_test veri setiyle 3’lü k-fold cross validation kullanarak eğiteceğim; diğer %10’luk validation setini ise eğitim sürecinde modele hiç göstermeyeceğim.
+        This time, I will split the dataset into a train_test set and a 10% validation set. I will train the model using 3-fold cross-validation on the train_test set, while keeping the 10% validation set completely separate and not showing it to the model during the training process.
         <p></p>
-        objective() ve logging_callback() isimli iki fonksiyonla Optuna için gerekli ayarlamaları yaptıktan sonra, ROC AUC skorunu artıracak şekilde modeli eğitmesi için Optuna’ya talimat veriyorum. Böylece Optuna, ROC AUC skorunu yaklaşık %1 oranında artırmayı başarıyor ve bulduğu en iyi parametreleri aşağıdaki gibi aktarıyor:
+        After setting up the necessary configurations for Optuna with two functions, objective() and logging_callback(), I instruct Optuna to optimize the model in a way that maximizes the ROC AUC score. As a result, Optuna successfully improves the ROC AUC score by approximately 1% and provides the best parameters it found, as shown below:
         </div>
         """,
         unsafe_allow_html=True,
@@ -3337,7 +3337,7 @@ with part3:
     st.markdown(
         """
         <div class="justified-text">
-        Hiperparameter tuning işleminden sonra artık modeli hiç görmediği validation seti üzerinde test edebiliriz:
+        After the hyperparameter tuning process, we can now test the model on the validation set, which it has never seen before:
         </div>
         """,
         unsafe_allow_html=True,
@@ -3358,7 +3358,7 @@ with part3:
     st.markdown(
         """
         <div class="center-text">
-        Böylece, validation kümesi üzerinde %87 oranında bir skor elde etmeyi başarıyoruz.
+        As a result, we achieve a score of 87% on the validation set.
         </div>
         """,
         unsafe_allow_html=True,
@@ -3377,7 +3377,7 @@ with part3:
     st.markdown(
         """
         <div class="justified-text">
-        Bütün bu sürecin bir hokus pokus şeklinde gerçekleşmediğini diğer iş birimlerine anlatabilmek için, modelin nasıl çalıştığını kendimiz anlayabilmeliyiz. Bu noktada, SHAP (SHapley Additive exPlanations) isimli bir kütüphaneyi kullanabiliriz. Bu kütüphane, çıktıya hangi özelliklerin nasıl etki ettiğini görselleştirmeye yarayan oldukça kullanışlı bir açık kaynaklı Python paketidir. SHAP’in BeeSwarm grafiği ile hangi özelliklerin en önemli olduğunu ve outputla aralarındaki ilişkileri görebiliriz:
+        To explain that all of this process wasn't just some magic trick, we need to understand how the model works ourselves. At this point, we can use a library called SHAP (SHapley Additive exPlanations). This open-source Python package is extremely useful for visualizing which features are influencing the output and how they are doing so. With SHAP's BeeSwarm plot, we can identify the most important features and see how they relate to the output.
         </div>
         """,
         unsafe_allow_html=True,
@@ -3389,7 +3389,7 @@ with part3:
     st.markdown(
         """
         <div class="justified-text">
-        Örneğin, yukarıdaki BeeSwarm grafiğine bakarak en önemli ilk üç değişkenin coin_earn, country_Zephyra ve kendi türettiğimiz coin_spend/coin_amount değişkeni olduğunu görebiliyoruz. Bu değişkenlerin outputa etkisini daha detaylı görmek için scatter fonksiyonunu kullanabiliriz. Mesela, coin_earn değişkeni ile satın alma arasında aşağıdaki grafikte görüldüğü üzere doğru orantılı bir ilişki mevcut:
+        For example, by looking at the BeeSwarm plot above, we can see that the top three most important variables are coin_earn, country_Zephyra, and the coin_spend/coin_amount feature we created. To examine the impact of these variables on the output in more detail, we can use the scatter function. For instance, there is a direct proportional relationship between the coin_earn variable and purchases, as shown in the graph below:
         </div>
         """,
         unsafe_allow_html=True,
@@ -3401,7 +3401,7 @@ with part3:
     st.markdown(
         """
         <div class="justified-text">
-        Bir başka örnek olarak, level_success değişkenini inceleyelim. level_success değişkeni ile satın alma arasında negatif bir ilişki var. Yani level_success arttıkça kullanıcıların satın alma ihtiyacı azalıyor:
+        Another example is the level_success variable. There is a negative relationship between level_success and purchases. In other words, as level_success increases, the likelihood of users making a purchase decreases:
         </div>
         """,
         unsafe_allow_html=True,
@@ -3413,7 +3413,7 @@ with part3:
     st.markdown(
         """
         <div class="justified-text">
-        Son olarak, bir de iOS kullanıp kullanmamanın satın almayı nasıl etkilediğine bakalım. Bununla ilgili platform_ios isminde bir binary değişkenimiz vardı, onu inceleyeceğiz:
+        Now, let's take a look at how using iOS affects the likelihood of making a purchase. We have a binary variable called `platform_ios` that we can examine for this:
         </div>
         """,
         unsafe_allow_html=True,
@@ -3425,7 +3425,7 @@ with part3:
     st.markdown(
         """
         <div class="justified-text">
-        Gördüğünüz gibi ve tahmin ettiğimiz gibi, iOS kullanmak satın almayı artıran faktörlerden biriymiş.
+        As you can see, and as we expected, using iOS is one of the factors that increases the likelihood of making a purchase.
         </div>
         """,
         unsafe_allow_html=True,
@@ -3433,7 +3433,7 @@ with part3:
 
 
 ###############################
-# PART IV: TAHMIN
+# PART IV: PREDICTION
 ###############################
 
 
@@ -3444,7 +3444,7 @@ with part4:
     st.markdown(
         """
         <div class="justified-text">
-        Bu bölümde aşağıda belirtilen yerlere uygun değerleri girerek modelin tahmin sonucunu görüntüleyebilirsiniz.
+        In this section, you can view the model's prediction results by entering the appropriate values in the fields below.
         <br><br>
         </div>
         """,
@@ -3452,82 +3452,90 @@ with part4:
     )
     left_part4, right_part4 = st.columns(2)
     age = left_part4.number_input(
-        "age değişkenini giriniz:", min_value=5, max_value=90, step=1, value=17
+        "Please enter the age variable:", min_value=5, max_value=90, step=1, value=17
     )
     time_spend = left_part4.number_input(
-        "time_spend değişkenini giriniz:",
+        "Please enter the time_spend variable:",
         min_value=0,
         max_value=120000,
         step=1000,
         value=38890,
     )
     coin_spend = left_part4.number_input(
-        "coin_spend değişkenini giriniz:",
+        "Please enter the coin_spend variable:",
         min_value=0,
         max_value=350000,
         step=5000,
         value=117500,
     )
     coin_earn = left_part4.number_input(
-        "coin_earn değişkenini giriniz:",
+        "Please enter the coin_earn variable:",
         min_value=0,
         max_value=375000,
         step=5000,
         value=125640,
     )
     level_success = left_part4.number_input(
-        "level_success değişkenini giriniz:",
+        "Please enter the level_success variable:",
         min_value=0,
         max_value=1000,
         step=1,
         value=255,
     )
     level_fail = left_part4.number_input(
-        "level_fail değişkenini giriniz:", min_value=0, max_value=1000, step=1, value=0
+        "Please enter the level_fail variable:",
+        min_value=0,
+        max_value=1000,
+        step=1,
+        value=0,
     )
     level_start = left_part4.number_input(
-        "level_start değişkenini giriniz:",
+        "Please enter the level_start variable:",
         min_value=0,
         max_value=1000,
         step=1,
         value=278,
     )
     booster_spend = left_part4.number_input(
-        "booster_spend değişkenini giriniz:",
+        "Please enter the booster_spend variable:",
         min_value=0,
         max_value=500,
         step=50,
         value=110,
     )
     booster_earn = right_part4.number_input(
-        "booster_earn değişkenini giriniz:",
+        "Please enter the booster_earn variable:",
         min_value=0,
         max_value=500,
         step=50,
         value=205,
     )
     coin_amount = right_part4.number_input(
-        "coin_amount değişkenini giriniz:",
+        "Please enter the coin_amount variable:",
         min_value=0,
         max_value=37500,
         step=1750,
         value=12262,
     )
     shop_open = right_part4.number_input(
-        "shop_open değişkenini giriniz:", min_value=0, max_value=20, step=1, value=1
+        "Please enter the shop_open variable:",
+        min_value=0,
+        max_value=20,
+        step=1,
+        value=1,
     )
     event_participate = right_part4.selectbox(
-        "event_participate değişkenini seçiniz:", ["Evet", "Hayir"]
+        "Please select the event_participate variable:", ["Yes", "No"]
     )
-    if event_participate == "Evet":
+    if event_participate == "Yes":
         event_participate = 1
     else:
         event_participate = 0
     platform = right_part4.selectbox(
-        "platform değişkenini seçiniz:", ["ios", "android"]
+        "Please select the platform variable:", ["ios", "android"]
     )
     network = right_part4.selectbox(
-        "network değişkenini seçiniz:",
+        "Please enter the network variable:",
         [
             "Oyster",
             "Piggy",
@@ -3546,7 +3554,7 @@ with part4:
         ],
     )
     country = right_part4.selectbox(
-        "country değişkenini seçiniz:",
+        "Please select the country variable:",
         [
             "Zephyra",
             "Thalassia",
@@ -3673,10 +3681,10 @@ with part4:
         model_input["coin_spend"] / model_input["coin_amount"]
     )
 
-    if st.button("Tahmin et!"):
+    if st.button("Predict!"):
         prediction = model.predict(model_input)
         if prediction == 1:
-            st.success(f"Kullanıcı satın alacak! :)")
+            st.success(f"This player will purchase! :)")
         else:
-            st.success(f"Kullanıcı satın almayacak! :)")
+            st.success(f"This player won't purchase! :)")
         st.balloons()

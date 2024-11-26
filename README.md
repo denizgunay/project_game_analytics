@@ -8,7 +8,7 @@ The Game Analytics project is organized into four main parts:
 
 1. **Analysis**: This part includes general data analysis and exploration of the game data, providing insights into player behavior and performance.
 2. **A/B Testing**: Statistical tests to compare different versions of the game or game features, determining the impact of specific changes on user engagement and retention.
-3. **Modeling**: Involves building and evaluating models for user behavior prediction.
+3. **Modelling**: Involves building and evaluating models for user behavior prediction.
 4. **Prediction**: In this part, you can test the model.
 
 
