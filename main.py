@@ -1468,42 +1468,7 @@ with part1:
             }
         </style>
         <div class="justified-text">
-            When we compare the above graph with the previous one, we can see that DAU is lower than the daily installations. There could be several reasons for this:
-
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.markdown("- The advertisements may not accurately reflect the gameplay.")
-    st.markdown(
-        "- The early levels of the game may be too easy or too difficult, or the tutorials may be insufficient."
-    )
-    st.markdown(
-        "- There may be too many in-game ads, which could be discouraging players from continuing to play."
-    )
-
-    st.markdown(
-        """
-    <style>
-    [data-testid="stMarkdownContainer"] ul{
-        padding-left:400px;
-        padding-top:20px;
-    }
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-        <style>
-            .justified-text {
-                text-align: justify;
-            }
-        </style>
-        <div class="justified-text">
-            Additionally, although both DAU and daily session numbers show an increasing trend in May, we observe a decline in both DAU and daily sessions in June. To make a comment on the rate of increase and decrease in DAU and daily sessions, we will examine the SessionDAU graph.
+            Although both DAU and daily session numbers show an increasing trend in May, we observe a decline in both DAU and daily sessions in June. To make a comment on the rate of increase and decrease in DAU and daily sessions, we will examine the SessionDAU graph.
 
         </div>
         """,
